@@ -1,0 +1,2 @@
+class InitiatorBoxExchange < BoxExchange
+end

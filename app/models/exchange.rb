@@ -7,11 +7,15 @@ class Exchange < ApplicationRecord
   # has_many :initiator_boxes, through: :initiator_box_exchanges, source: :box
   # has_many :recipient_boxes, through: :recipient_box_exchanges, source: :box
 
-  has_many :box_exchanges , dependent: :destroy
+  has_many :box_exchanges, dependent: :destroy, inverse_of: :exchange
+  has_many :initiator_box_exchanges, -> { where(type: 'InitiatorBoxExchange') }, class_name: 'InitiatorBoxExchange', inverse_of: :exchange
+  has_many :recipient_box_exchanges, -> { where(type: 'RecipientBoxExchange') }, class_name: 'RecipientBoxExchange', inverse_of: :exchange
   has_many :boxes, through: :box_exchanges
   validates :recipient_id, :initiator_id, :status, presence: true
 
   accepts_nested_attributes_for :box_exchanges, allow_destroy: true
+  accepts_nested_attributes_for :boxes
+
   # accepts_nested_attributes_for :initiator_box_exchanges, allow_destroy: true
   # accepts_nested_attributes_for :recipient_box_exchanges, allow_destroy: true
 

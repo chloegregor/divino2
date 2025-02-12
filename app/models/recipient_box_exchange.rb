@@ -1,0 +1,2 @@
+class RecipientBoxExchange < BoxExchange
+end

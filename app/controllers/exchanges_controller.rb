@@ -63,7 +63,8 @@ class ExchangesController < ApplicationController
   end
 
   def load_boxes_params
-    params.permit(:user_id)
+    filtered_params = params.except(:exchange)
+    filtered_params.permit(:user_id)
   end
 
 end

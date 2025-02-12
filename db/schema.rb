@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_23_100059) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
+    t.string "type"
     t.index ["box_id"], name: "index_box_exchanges_on_box_id"
     t.index ["exchange_id"], name: "index_box_exchanges_on_exchange_id"
   end
@@ -108,6 +109,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
     t.string "status", default: "pending"
     t.integer "recipient_id"
     t.integer "initiator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "initiator_box_exchanges", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipient_box_exchanges", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
