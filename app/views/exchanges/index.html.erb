@@ -1,0 +1,161 @@
+<%= render "shared/header"%>
+<div class="container" data-controller="exchange">
+  <div class="flex-column">
+    <div class="margin-bottom-none">
+      <%if current_user%>
+        <% if current_user.id != @user.id%>
+        <h2><%=@user.pseudo%>'s cellar</h2>
+        <%else%>
+        <div class="flex space-between">
+        <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
+        <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
+        </div>
+        <%end%>
+      <%else%>
+        <h2><%=@user.pseudo%>'s cellar</h2>
+      <%end%>
+    </div>
+
+    <div class="border-top display">
+      <div class="padding">
+        <h2 class="margin0">pending exchanges</h2>
+        <div class="flex-column">
+            <% if @user_pending_exchanges_as_recipient.present?%>
+              <div class="received border-bottom">
+                <div class="flex-column gap2 margin-top2 margin-bottom2 padding-right1 padding-left1 flex-wrap">
+                  <% @user_pending_exchanges_as_recipient.each do |exchange|%>
+                    <div class="flex gap2">
+                      <div class="">
+                        <% exchange.recipient_boxes.each do |box|%>
+                          <div class="border width20em align-center">
+                            <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                          </div>
+                        <%end%>
+                      </div>
+                      <div class="relative">
+                        <div class="absolute-20"><p class="margin0"><%=exchange.initiator.pseudo%>'s</p>
+                        </div>
+                        <div class="">
+                          <% exchange.initiator_boxes.each do |box|%>
+                            <div class="border width20em align-center">
+                              <%=link_to dividende_path(box.dividende) do%>
+                                <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                              <%end%>
+                            </div>
+                          <%end%>
+                        </div>
+                      </div>
+                      <div class="form flex-column gap05">
+                        <%= button_to "Accept", accept_user_path(@user), params: {exchange_id: exchange.id}%>
+                        <%= button_to "Refuse", reject_user_path(@user), params: {exchange_id: exchange.id}%>
+                      </div>
+                    </div>
+                  <%end%>
+                </div>
+              </div>
+            <%end%>
+          <% if @user_pending_exchanges_as_initiator.present?%>
+            <div class="sent border-bottom padding-right1 padding-left1">
+                <div class="flex gap2 margin-top2 margin-bottom2 flex-wrap">
+                  <% @user_pending_exchanges_as_initiator.each do |exchange|%>
+                    <div class="flex gap2">
+                      <div class="">
+                        <% exchange.initiator_boxes.each do |box|%>
+                          <div class="border width20em align-center">
+                            <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                          </div>
+                        <%end%>
+                      </div>
+
+                      <div class="relative">
+                        <div class="absolute-20"><p class="margin0"><%=exchange.recipient.pseudo%>'s</p></div>
+                        <% exchange.recipient_boxes.each do |box|%>
+                          <div class=" width20em border align-center">
+                            <%=link_to dividende_path(box.dividende) do%>
+                              <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                            <%end%>
+                          </div>
+                        <%end%>
+                      </div>
+                      <div class="italic">
+                        <p>pending <%= exchange.recipient.pseudo%> decision</p>
+                      </div>
+                  </div>
+                  <%end%>
+                </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+      <div class="bggrey padding">
+        <div class="border-bottom">
+          <h2 class="margin0">completed exchanges</h2>
+          <div class="flex-column gap2 margin-top2 margin-bottom2 padding-right1 padding-left1">
+              <%@user_accepted_exchanges.each do |exchange|%>
+                <div class="flex gap2">
+                  <%user_boxes = exchange.boxes.where(user_id:@user)%>
+                  <%partner_boxes = exchange.boxes.where.not(user_id:@user)%>
+                  <div class="flex-column gap1">
+                    <%user_boxes.each do |box|%>
+                      <div class="border width20em align-center">
+                        <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                      </div>
+                    <%end%>
+                  </div>
+                  <div class="relative">
+                    <%if partner_boxes.any?%>
+                      <div class="absolute-20"><p class="margin0"><%=partner_boxes.first.user.pseudo%>'s<p></div>
+                    <%end%>
+                    <%partner_boxes.each do |box|%>
+                      <div class="border width20em align-center">
+                        <%=link_to dividende_path(box.dividende) do%>
+                          <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                        <%end%>
+                      </div>
+                    <%end%>
+                  </div>
+                  <div class="italic">
+                    <p>initiatated by <%= exchange.initiator == @user? "you": exchange.initiator.pseudo %></p>
+                  </div>
+                </div>
+              <%end%>
+          </div>
+        </div>
+        <div class="padding">
+          <h2 class="margin0">refused exchanges</h2>
+              <div class="flex-column gap2 margin-top2 margin-bottom2 padding-right1 padding-left1">
+                <% if @user_rejected_exchanges_as_initiator.present?%>
+                  <div class="flex-column gap2">
+                    <% @user_rejected_exchanges_as_initiator.each do |exchange|%>
+                      <div class="flex gap2">
+                        <div>
+                          <% exchange.initiator_boxes.each do |box|%>
+                            <div class="border width20em align-center">
+                              <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                            </div>
+                          <%end%>
+                        </div>
+                        <div class="relative">
+                          <div class="absolute-20">
+                            <p class="margin0"> <%=exchange.recipient.pseudo%>'s</p>
+                          </div>
+                          <% exchange.recipient_boxes.each do |box|%>
+                            <div class="border width20em align-center">
+                              <%=link_to dividende_path(box.dividende) do%>
+                                <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                              <%end%>
+                            </div>
+                          <%end%>
+                        </div>
+                        <div class="italic">
+                          <p>refused by <%= exchange.recipient.present? ? exchange.recipient.pseudo : "" %></p>
+                        </div>
+                      </div>
+                    <%end%>
+                    </div>
+                  </div>
+                <%end%>
+        </div>
+      </div>
+  </div>
+</div>

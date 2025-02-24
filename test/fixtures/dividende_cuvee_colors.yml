@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bottle_quantity: 1
+  dividende: one
+  cuvee_color: one
+
+two:
+  bottle_quantity: 1
+  dividende: two
+  cuvee_color: two

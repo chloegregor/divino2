@@ -1,0 +1,2 @@
+module DividendesHelper
+end

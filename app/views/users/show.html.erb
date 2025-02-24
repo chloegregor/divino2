@@ -1,0 +1,82 @@
+<%= render "shared/header"%>
+<div class="container">
+  <div class="flex-column">
+    <div class="margin-bottom-none">
+      <%if current_user%>
+        <% if current_user.id != @user.id%>
+        <h2><%=@user.pseudo%>'s cellar</h2>
+        <%else%>
+        <div class="flex space-between">
+        <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
+        <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
+        </div>
+        <%end%>
+      <%else%>
+        <h2><%=@user.pseudo%>'s cellar</h2>
+      <%end%>
+    </div>
+
+    <div class="border-top display flex">
+        <div class="width60">
+        <%@boxes.each do |vinyard, boxes|%>
+        <%=link_to vinyard_path(vinyard), class:"text-decoration black" do %>
+          <h4><%=vinyard.name%></h4>
+        <%end%>
+          <div class="grid-box">
+            <%boxes.each do |box|%>
+              <%=link_to dividende_path(box.dividende), class:"text-decoration black" do%>
+                <div class="box">
+                  <div class="height100">
+
+                    <div class="vinyard-name align-center border-bottom">
+                      <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
+                    </div>
+                    <div class="vinyard-info flex space-between">
+                      <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
+                      <div class="name appellation">
+                          <% cuvee_colors.each do |cc| %>
+                            <p class="margin-top">
+                              <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
+                              </p>
+                          <%end%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+            <%end%>
+          </div>
+        <% end %>
+
+      </div>
+      <% if current_user && @user.id != current_user.id%>
+        <div class="width40 bggrey">
+          <h4>exchange</h4>
+          <%= form_with model: @exchange, url:user_exchanges_path(@user) do |form|%>
+            <%= form.hidden_field :recipient_id, value: @user.id %>
+            <%= form.hidden_field :initiator_id, value: current_user.id%>
+            <div class="">
+              <h2> Choose from <%=@user.pseudo%>'s cellar</h2>
+              <%= form.fields_for :box_exchanges do |box_exchange|%>
+                <%=box_exchange.select :box_id,
+                    @user.boxes.map { |box| ["#{box.dividende.vinyard.name} - #{box.dividende.year}", box.id]},{prompt: "Choose a box"}%>
+              <%end%>
+            </div>
+            <div class="">
+              <h2> Choose from your cellar</h2>
+              <%= form.fields_for :box_exchanges do |box_exchange| %>
+              <%=box_exchange.select :box_id,
+                    current_user.boxes.map { |box| ["#{box.dividende.vinyard.name} - #{box.dividende.year}", box.id]},{prompt: "Choose a box"} %>
+              <%end%>
+            </div>
+            <div class="">
+              <%= form.submit "exchange"%>
+            </div>
+          <%end%>
+        <%end%>
+
+
+      </div>
+    </div>
+  </div>
+</div>

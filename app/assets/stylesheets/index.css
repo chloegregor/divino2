@@ -1,0 +1,24 @@
+
+
+
+.container{
+  margin: 0 auto;
+  width:90%;
+}
+
+.display{
+min-height: 100vh;
+margin-bottom: 0.1em;
+width:100%;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
+  gap: 0.5em;
+  margin: 0.5em;
+}
+
+.category{
+  border-bottom: 0.1em solid #93679e;
+}

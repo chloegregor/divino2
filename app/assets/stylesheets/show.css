@@ -1,0 +1,27 @@
+.photo img{
+  width: 450px;
+  margin-top: 0.5em;
+}
+
+.flew-wrap{
+  flex-wrap: nowrap;
+}
+@media (max-width: 850px) {
+  .flex-wrap{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media(max-width: 850px){
+  .photo img{
+    width: 100%;
+  }
+}
+
+
+.description{
+  font-family: "Inter", sans-serif;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}

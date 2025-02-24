@@ -1,0 +1,152 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+ body{
+   margin: 0 0 3em 0;
+   background: #fffbf2;
+   font-family: "Inter", sans-serif;
+ }
+
+
+.align-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-bottom{
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.flex{
+  display: flex;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.border-top{
+  border-top: 1px solid #c0c0c0;
+}
+
+.border{
+  border: 1px solid #c0c0c0;
+}
+
+.text-align-end{
+  text-align: end;
+}
+
+.text-align-center{
+  text-align: center;
+}
+
+.margin-bottom-none{
+  margin-bottom: 0;
+}
+
+.margin-top-none{
+  margin-top: 0;
+}
+
+.text-decoration{
+  text-decoration: none;
+}
+
+.black{
+  color: black;
+}
+
+.height100{
+  height: 100%;
+}
+
+.flex-column{
+  display:flex;
+  flex-direction: column;
+}
+
+.gap05{
+  gap: 0.5em;
+}
+
+.gap1{
+  gap: 1em;
+}
+
+.gap2{
+  gap: 2em;
+}
+
+.margin0{
+  margin: 0;
+}
+
+p{
+  font-family: "Inter", sans-serif;
+  font-size: 1em;
+}
+
+
+.relative{
+  position: relative;
+}
+
+.absolute-20{
+  position: absolute;
+  top: -20px;
+  font-size: 0.6em;
+  font-weight: bold;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.width20em{
+  width: 20em;
+}
+
+.bggrey{
+  background-color: #f7f2e8;
+
+}
+
+.margin-top2{
+  margin-top: 2em;
+}
+
+.margin-bottom2{
+  margin-bottom: 2em;
+}
+
+.padding-left1{
+  padding-left: 1em;
+}
+
+.padding-right1{
+  padding-right: 1em;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.padding{
+  padding: 1em;
+}

@@ -1,0 +1,22 @@
+<div class="banner">
+  <div class="container-banner flex space-between">
+    <div class="id">
+      <h1 id=logo><%= link_to "Divino", root_path %></h1>
+      <p class="tagline">échange de caisses entre particuliers</p>
+    </div>
+
+      <%if user_signed_in? %>
+        <div class=" login">
+          <% currentuserpseudo = current_user.pseudo %>
+          <%=link_to "Bonjour #{currentuserpseudo}", user_path(current_user), class:"text-decoration log"%>
+          <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class:"text-decoration log" %>
+        </div>
+      <%else%>
+        <div class="login">
+          <%=link_to "login", new_user_session_path, class:"text-decoration log" %>
+          <%=link_to "sign up", new_user_registration_path, class:"text-decoration log" %>
+        </div>
+      <%end%>
+
+  </div>
+</div>

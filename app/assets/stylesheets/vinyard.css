@@ -1,0 +1,44 @@
+.vinyard{
+  width:10em;
+  height: 9em;
+  border: 1px solid #c0c0c0;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+
+
+.vinyard-name{
+  height: 2.5em;
+  margin-bottom: 0.3em;
+
+}
+
+.name{
+  display: inline-block;
+  font-family: "inter", sans-serif;
+  font-size: 0.7em;
+  margin:0;
+}
+
+.vinyard-info{
+height: calc(100% - 2.8em);
+flex-direction: column;
+}
+
+.box{
+  width:12em;
+  height: 12em;
+  border: 1px solid #c0c0c0;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.grid-box{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  gap: 0.5em;
+  margin: 0.5em;
+}

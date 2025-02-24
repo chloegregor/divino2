@@ -1,0 +1,13 @@
+.footer{
+  background-color: #93679e;
+  color: #fefbba;
+  height: 2em;
+}
+.credits{
+  font-family: "EB Garamond", serif;
+  font-size: 0.4em;
+  color:#fefbba;
+  margin: 0;
+  justify-content: end;
+
+}

@@ -1,0 +1,49 @@
+.banner{
+  background-color: #93679e;
+  font-size: 2em;
+  color: #fefbba;
+  height: 2em;
+
+}
+
+.container-banner{
+  margin: 0 auto;
+  width:97%;
+}
+
+#logo a{
+  text-decoration: none;
+  color: #fefbba;
+}
+
+#logo{
+  font-family: "EB Garamond", serif;
+  font-size: 0.7em;
+  margin-bottom: 0em;
+  margin-top: 0em;
+
+}
+
+.tagline{
+  font-family: "EB Garamond", serif;
+  font-size: 0.3em;
+  color: #fefbba;
+  margin: 0;
+
+
+}
+
+.log{
+  font-family: "Inter", sans-serif;
+  font-size: 0.4em;
+  color: #fefbba;
+  margin: 0;
+  justify-content: end;
+}
+
+.login{
+  font-family: "Inter", sans-serif;
+  color: #fefbba;
+  margin-top: 10px;
+  justify-content: end;
+}

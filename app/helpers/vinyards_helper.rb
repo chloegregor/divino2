@@ -1,0 +1,2 @@
+module VinyardsHelper
+end

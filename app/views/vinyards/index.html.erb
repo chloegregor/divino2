@@ -1,0 +1,43 @@
+
+<%= render "shared/header"%>
+<div class="container">
+  <div class="menu">
+    <div class="flex space-between">
+      <h2 class="category">explore vinyards</h2>
+      <h2>explore boxes</h2>
+      <h2>my cellar</h2>
+    </div>
+    </div>
+    <div class="border-top display ">
+      <div class="vinyards grid">
+        <% @vinyards.each do |vinyard|%>
+        <div class="vinyard">
+          <%= link_to vinyard_path(vinyard), class: "text-decoration black" do %>
+            <div class="height100 ">
+              <div class="vinyard-name align-center border-bottom">
+                <h3 class="name"><%= vinyard.name %></h3>
+              </div>
+              <div class="vinyard-info flex space-between">
+                <% va = vinyard.appellations%>
+                  <div class="name appellation text-align-center">
+                    <p class="margin-top-none margin-bottom-none"> appellations : <br><br>
+                      <% va.each_with_index do |appellation, index| %>
+                          <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == va.size - 1%>
+                      <%end%>
+                    </p>
+                  </div>
+                  <div class="name text-align-end">
+                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.boxes.length%></p>
+                  </div>
+
+
+              </div>
+            </div>
+            <%end%>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+
+<%= render "shared/footer"%>
