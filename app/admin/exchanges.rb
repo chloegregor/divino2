@@ -18,20 +18,20 @@ ActiveAdmin.register Exchange do
         thead do
           tr do
             th 'Box'
-            th 'Role'
+            th 'User'
           end
         end
         tbody do
           exchange.initiator_box_exchanges.each do |box_exchange|
             tr do
               td box_exchange.box.dividende.vinyard.name
-              td box_exchange.role
+              td box_exchange.box.user.pseudo
             end
           end
           exchange.recipient_box_exchanges.each do |box_exchange|
             tr do
               td box_exchange.box.dividende.vinyard.name
-              td box_exchange.role
+              td box_exchange.box.user.pseudo
             end
           end
         end
@@ -53,7 +53,8 @@ ActiveAdmin.register Exchange do
     div id: "initiator-boxes-container" do
       f.inputs "Initiator box exchanges" do
           f.has_many :initiator_box_exchanges, heading: false, allow_destroy: true do |b|
-            b.input :box, as: :select, collection: [], input_html: { class: 'box-exchange-select', id: 'initiator-target-select' }, prompt: "Sélectionnez une boite"
+            initiator_box_exchanges = BoxExchange.where(role: "initiator", exchange_id: f.object.id)
+            b.input :box, as: :select, collection: initiator_box_exchanges.map {|i| ["#{i.box.dividende.vinyard.name} - #{i.box.dividende.year}", i.box.id]}, input_html: { class: 'box-exchange-select', id: 'initiator-target-select' }, prompt: "Sélectionnez une boite"
             b.input :role, as: :hidden, input_html: { value: 'initiator' }
         end
       end
@@ -62,7 +63,8 @@ ActiveAdmin.register Exchange do
     div id: "recipient-boxes-container" do
       f.inputs "Recipient box exchanges" do
         f.has_many :recipient_box_exchanges, heading: false, allow_destroy: true do |b|
-          b.input :box, as: :select, collection: [], input_html: { class: 'box-exchange-select', id: 'recipient-target-select' }, prompt: "Sélectionnez une boite"
+          recipient_box_exchanges = BoxExchange.where(role: "recipient", exchange_id: f.object.id)
+          b.input :box, as: :select, collection: recipient_box_exchanges.map {|i| ["#{i.box.dividende.vinyard.name} - #{i.box.dividende.year}", i.box.id]}, input_html: { class: 'box-exchange-select', id: 'recipient-target-select' }, prompt: "Sélectionnez une boite"
           b.input :role, as: :hidden, input_html: { value: 'recipient' }
         end
       end
@@ -70,6 +72,37 @@ ActiveAdmin.register Exchange do
     f.actions
   end
 
+  controller do
+    def create
+      super
+      exchange = resource
+      if exchange.status == "accepted"
+        swap(exchange)
+      end
+    end
+
+    def update
+      super
+      exchange = resource
+      if exchange.status == "accepted"
+        swap(exchange)
+      end
+
+
+
+    end
+
+    private
+
+    def swap(exchange)
+      exchange.initiator_box_exchanges.each do |box_exchange|
+        box_exchange.box.update(user_id: exchange.recipient_id)
+      end
+      exchange.recipient_box_exchanges.each do |box_exchange|
+        box_exchange.box.update(user_id: exchange.initiator_id)
+      end
+    end
+  end
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
