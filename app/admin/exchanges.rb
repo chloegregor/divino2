@@ -1,6 +1,43 @@
 ActiveAdmin.register Exchange do
+  remove_filter :initiator_box_exchanges
+  remove_filter :recipient_box_exchanges
   permit_params :status, :recipient_id, :initiator_id,
-   box_exchanges_attributes: [:id, :box_id, :role, :_destroy]
+  initiator_box_exchanges_attributes: [:id, :box_id, :role, :_destroy],
+  recipient_box_exchanges_attributes: [:id, :box_id, :role, :_destroy]
+
+  show do
+    attributes_table do
+      row :status
+      row :initiator do |exchange|
+        exchange.initiator.pseudo
+      end
+      row :recipient do |exchange|
+        exchange.recipient.pseudo
+      end
+      table do
+        thead do
+          tr do
+            th 'Box'
+            th 'Role'
+          end
+        end
+        tbody do
+          exchange.initiator_box_exchanges.each do |box_exchange|
+            tr do
+              td box_exchange.box.dividende.vinyard.name
+              td box_exchange.role
+            end
+          end
+          exchange.recipient_box_exchanges.each do |box_exchange|
+            tr do
+              td box_exchange.box.dividende.vinyard.name
+              td box_exchange.role
+            end
+          end
+        end
+      end
+    end
+  end
 
   form do |f|
 
@@ -15,18 +52,18 @@ ActiveAdmin.register Exchange do
     end
     div id: "initiator-boxes-container" do
       f.inputs "Initiator box exchanges" do
-          f.has_many :box_exchanges, heading: false, allow_destroy: true do |b|
+          f.has_many :initiator_box_exchanges, heading: false, allow_destroy: true do |b|
             b.input :box, as: :select, collection: [], input_html: { class: 'box-exchange-select', id: 'initiator-target-select' }, prompt: "Sélectionnez une boite"
-            b.input :type, as: :hidden, input_html: { value: 'InitiatorBoxExchange' }
+            b.input :role, as: :hidden, input_html: { value: 'initiator' }
         end
       end
     end
 
     div id: "recipient-boxes-container" do
-      f.inputs "Recipient box exchanges", wrapper_html: { id: "recipient-box-container" } do
-        f.has_many :box_exchanges, heading: false, allow_destroy: true do |b|
+      f.inputs "Recipient box exchanges" do
+        f.has_many :recipient_box_exchanges, heading: false, allow_destroy: true do |b|
           b.input :box, as: :select, collection: [], input_html: { class: 'box-exchange-select', id: 'recipient-target-select' }, prompt: "Sélectionnez une boite"
-          b.input :type, as: :hidden, input_html: { value: 'RecipientBoxExchange' }
+          b.input :role, as: :hidden, input_html: { value: 'recipient' }
         end
       end
     end
