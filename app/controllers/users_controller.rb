@@ -7,8 +7,4 @@ class UsersController < ApplicationController
   end
 
 
-  def cellar
-    @user = current_user
-    @dividende = @user.dividendes
-  end
 end

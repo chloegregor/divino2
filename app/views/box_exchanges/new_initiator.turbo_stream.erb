@@ -1,0 +1,3 @@
+<%= turbo_stream.append "select-hidden-initiator" do%>
+    <%= render "users/initiator_box_fields", index: Time.current.to_i, boxes: @boxes %>
+<%end%>

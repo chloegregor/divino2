@@ -18,7 +18,8 @@ class ExchangesController < ApplicationController
     if @exchange.save
       redirect_to user_path(@exchange.recipient)
     else
-      render :new
+      Rails.logger.debug @exchange.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -55,7 +56,7 @@ class ExchangesController < ApplicationController
   end
   private
   def exchange_params
-    params.require(:exchange).permit(:recipient_id, :initiator_id, box_exchanges_attributes: [:box_id])
+    params.require(:exchange).permit(:recipient_id, :initiator_id, box_exchanges_attributes: [:box_id, :role])
   end
 
   def update_params

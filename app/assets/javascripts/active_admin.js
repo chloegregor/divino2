@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const recipientContainer = document.querySelector("#recipient-boxes-container");
 
 
-  const AddButtons = document.querySelectorAll(".has_many_add");
 
   if (initiatorContainer) {
     const addButton = initiatorContainer.querySelector(".has_many_add");

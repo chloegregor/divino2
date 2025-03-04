@@ -150,3 +150,7 @@ p{
 .padding{
   padding: 1em;
 }
+
+.hidden{
+  display: none;
+} 

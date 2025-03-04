@@ -11,7 +11,7 @@ class Exchange < ApplicationRecord
   has_many :boxes, through: :box_exchanges
   validates :recipient_id, :initiator_id, :status, presence: true
 
-  accepts_nested_attributes_for :box_exchanges, allow_destroy: true
+  accepts_nested_attributes_for :box_exchanges, reject_if: proc { |attributes| attributes['box_id'].blank? }
   accepts_nested_attributes_for :initiator_box_exchanges, allow_destroy: true
   accepts_nested_attributes_for :recipient_box_exchanges, allow_destroy: true
 
@@ -23,13 +23,13 @@ class Exchange < ApplicationRecord
     ["box_exchanges", "boxes", "initiator", "recipient"]
   end
 
-  # def initiator_boxes
-  #   box_exchanges.joins(:box).where(boxes: { user_id: initiator_id }).map(&:box)
-  # end
+  def initiator_boxes
+    box_exchanges.joins(:box).where(boxes: { user_id: initiator_id }).map(&:box)
+  end
 
-  # def recipient_boxes
-  #   box_exchanges.joins(:box).where(boxes: { user_id: recipient_id }).map(&:box)
-  # end
+  def recipient_boxes
+    box_exchanges.joins(:box).where(boxes: { user_id: recipient_id }).map(&:box)
+  end
 
 
 end
