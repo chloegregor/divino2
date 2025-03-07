@@ -129,9 +129,9 @@
                     <% @user_rejected_exchanges_as_initiator.each do |exchange|%>
                       <div class="flex gap2">
                         <div>
-                          <% exchange.initiator_boxes.each do |box|%>
+                          <% exchange.initiator_box_exchanges.each do |box|%>
                             <div class="border width20em align-center">
-                              <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                              <p><%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
                             </div>
                           <%end%>
                         </div>
@@ -139,17 +139,15 @@
                           <div class="absolute-20">
                             <p class="margin0"> <%=exchange.recipient.pseudo%>'s</p>
                           </div>
-                          <% exchange.recipient_boxes.each do |box|%>
+                          <% exchange.recipient_box_exchanges.each do |box|%>
                             <div class="border width20em align-center">
-                              <%=link_to dividende_path(box.dividende) do%>
-                                <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                              <%=link_to dividende_path(box.box.dividende) do%>
+                                <p> <%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
                               <%end%>
                             </div>
                           <%end%>
                         </div>
-                        <div class="italic">
-                          <p>refused by <%= exchange.recipient.present? ? exchange.recipient.pseudo : "" %></p>
-                        </div>
+
                       </div>
                     <%end%>
                     </div>

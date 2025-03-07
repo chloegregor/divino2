@@ -1,7 +1,7 @@
 class DividendesController < ApplicationController
 
   def index
-    @dividendes = Dividende.all
+    @dividendes = Dividende.current_year
   end
 
   def show

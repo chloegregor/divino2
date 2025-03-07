@@ -30,6 +30,10 @@ puts "Destroying all appellation"
 Appellation.destroy_all
 puts "Destroying all Vinyard"
 Vinyard.destroy_all
+puts "destroying all Box Exchange"
+BoxExchange.destroy_all
+puts "destroying all Exchange"
+Exchange.destroy_all
 
 
 

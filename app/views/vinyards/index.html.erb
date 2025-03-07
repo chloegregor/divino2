@@ -5,7 +5,11 @@
     <div class="flex space-between">
       <h2 class="category">explore vinyards</h2>
       <h2>explore boxes</h2>
-      <h2>my cellar</h2>
+      <%if current_user%>
+        <%=link_to user_path(current_user) do %>
+          <h2>my cellar</h2>
+        <%end%>
+      <%end%>
     </div>
     </div>
     <div class="border-top display ">
@@ -20,14 +24,14 @@
               <div class="vinyard-info flex space-between">
                 <% va = vinyard.appellations%>
                   <div class="name appellation text-align-center">
-                    <p class="margin-top-none margin-bottom-none"> appellations : <br><br>
+                    <p class="margin-top-none margin-bottom-none">
                       <% va.each_with_index do |appellation, index| %>
                           <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == va.size - 1%>
                       <%end%>
                     </p>
                   </div>
                   <div class="name text-align-end">
-                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.boxes.length%></p>
+                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.dividendes.current_year.includes(:boxes).flat_map(&:boxes).uniq.length %></p>
                   </div>
 
 

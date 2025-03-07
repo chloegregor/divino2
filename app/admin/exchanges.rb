@@ -25,13 +25,13 @@ ActiveAdmin.register Exchange do
           exchange.initiator_box_exchanges.each do |box_exchange|
             tr do
               td box_exchange.box.dividende.vinyard.name
-              td box_exchange.box.user.pseudo
+              td box_exchange.exchange.initiator.pseudo
             end
           end
           exchange.recipient_box_exchanges.each do |box_exchange|
             tr do
               td box_exchange.box.dividende.vinyard.name
-              td box_exchange.box.user.pseudo
+              td box_exchange.exchange.recipient.pseudo
             end
           end
         end

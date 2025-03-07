@@ -4,12 +4,17 @@
     <div class="margin-bottom-none">
       <%if current_user%>
         <% if current_user.id != @user.id%>
-        <h2><%=@user.pseudo%>'s cellar</h2>
-        <%else%>
         <div class="flex space-between">
-        <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
-        <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
-        </div>
+          <h2><%=@user.pseudo%>'s cellar</h2>
+          <%= link_to user_path(current_user) do%>
+            <h2>my cellar</h2>
+          <%end%>
+          </div>
+        <%else%>
+          <div class="flex space-between">
+            <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
+            <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
+          </div>
         <%end%>
       <%else%>
         <h2><%=@user.pseudo%>'s cellar</h2>

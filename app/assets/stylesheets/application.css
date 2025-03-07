@@ -153,4 +153,17 @@ p{
 
 .hidden{
   display: none;
-} 
+}
+
+.width40{
+  width: 40%;
+}
+
+/* application.css */
+.flash-success {
+  background-color: #4CAF50;  /* Couleur de fond verte pour le succès */
+  color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+}

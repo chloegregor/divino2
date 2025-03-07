@@ -3,7 +3,7 @@ ActiveAdmin.register Vinyard do
   permit_params :name, :description,
               vinyard_appellations_attributes: [:id, :name, :appellation_id, :_destroy,
                 cuvees_attributes: [:id, :name, :_destroy,
-                cuvee_colors_attributes: [:id, :color_id, :_destroy]
+                cuvee_colors_attributes: [:id, :description, :color_id, :_destroy]
               ]
             ],
             dividendes_attributes: [:id, :year, :_destroy,
@@ -70,6 +70,7 @@ ActiveAdmin.register Vinyard do
         cuvee.input :name, label: 'Cuvee Name'
         cuvee.has_many :cuvee_colors, heading: 'Cuvee Colors', allow_destroy: true do |cc|
           cc.input :color_id, as: :select, collection: Color.all.pluck(:color, :id), label: 'Choose Color'
+          cc.input :description, label: 'Description', as: :text
           end
       end
     end

@@ -6,7 +6,7 @@
     </div>
 
       <%if user_signed_in? %>
-        <div class=" login">
+        <div class=" login ">
           <% currentuserpseudo = current_user.pseudo %>
           <%=link_to "Bonjour #{currentuserpseudo}", user_path(current_user), class:"text-decoration log"%>
           <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class:"text-decoration log" %>
