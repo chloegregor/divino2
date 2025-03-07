@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :boxes
+  has_many :boxes, dependent: :destroy
   has_many :dividendes, through: :boxes
-  has_many :exchanges_as_initator, foreign_key: "initiator_id", class_name: "Exchange"
-  has_many :exchanges_as_recipient, foreign_key: "recipient_id", class_name: "Exchange"
+  has_many :exchanges_as_initator, foreign_key: "initiator_id", class_name: "Exchange", dependent: :destroy
+  has_many :exchanges_as_recipient, foreign_key: "recipient_id", class_name: "Exchange", dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 

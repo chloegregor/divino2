@@ -8,6 +8,8 @@ class Dividende < ApplicationRecord
   has_many :vinyard_appellations, through: :cuvees
   has_many :users, through: :boxes
 
+  scope :current_year, -> { where(year: Time.current.year) }
+
   accepts_nested_attributes_for :dividende_cuvee_colors, allow_destroy: true
 
   def self.ransackable_attributes(auth_object = nil)

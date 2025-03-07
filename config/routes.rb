@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  # get 'box_echanges/new'
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
       post "accept", to: "exchanges#accepted_exchanges"
       post "reject", to: "exchanges#rejected_exchanges"
     end
+    resources :box_exchanges, only: [:new]
   end
 
     get 'exchanges/load_boxes', to: 'exchanges#load_boxes'

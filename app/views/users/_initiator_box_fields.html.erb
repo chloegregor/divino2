@@ -1,0 +1,6 @@
+<div>
+  <%= fields_for "exchange[box_exchanges_attributes][#{index}]", BoxExchange.new do |form| %>
+    <%= form.hidden_field :role, value: "initiator"%>
+    <%= form.select :box_id, boxes.map { |box| ["#{box.dividende.vinyard.name} - #{box.dividende.year}", box.id]},{prompt: "Choose a box"}, {class:"select-initiator"}  %>
+  <%end%>
+</div>

@@ -14,11 +14,14 @@ class ExchangesController < ApplicationController
   end
 
   def create
+    recipient = User.find(exchange_params[:recipient_id]).pseudo
     @exchange = Exchange.new(exchange_params)
     if @exchange.save
+       flash[:success] = "the proposal of exchange has been sent to #{recipient} "
       redirect_to user_path(@exchange.recipient)
     else
-      render :new
+      Rails.logger.debug @exchange.errors.full_messages
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,7 +29,7 @@ class ExchangesController < ApplicationController
     puts "PARAMS REÇUS coucou chloe : #{params.inspect}" # ➜ Debug pour voir tous les paramètres reçus
     user_id = load_boxes_params[:user_id]
     # Récupérer les boîtes de l'initiator sélectionné
-    boxes = Box.where(user_id: user_id).includes(:dividende).includes(:vinyard) # Vous pouvez ajouter d'autres critères si nécessaire
+    boxes = Box.where(user_id: user_id).where(dividende: { year: Time.current.year }).includes(:dividende).includes(:vinyard) # Vous pouvez ajouter d'autres critères si nécessaire
     render json: boxes.as_json(include: [:dividende, :vinyard])
   end
 
@@ -44,6 +47,15 @@ class ExchangesController < ApplicationController
       end
       box.save
     end
+    @exchange.boxes.each do |box|
+      # Chercher tous les échanges en attente où une des boîtes est déjà impliquée
+      BoxExchange.joins(:exchange).where(box: box)
+               .where(exchanges: { status: "pending" }).each do |box_exchange|
+        other_exchange = box_exchange.exchange
+        # Marquer ces échanges comme refusés
+        other_exchange.update(status: "rejected") if other_exchange.status == "pending"
+      end
+    end
     redirect_to user_exchanges_path(current_user)
   end
 
@@ -55,7 +67,7 @@ class ExchangesController < ApplicationController
   end
   private
   def exchange_params
-    params.require(:exchange).permit(:recipient_id, :initiator_id, box_exchanges_attributes: [:box_id])
+    params.require(:exchange).permit(:recipient_id, :initiator_id, box_exchanges_attributes: [:box_id, :role])
   end
 
   def update_params

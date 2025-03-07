@@ -1,0 +1,3 @@
+<%= turbo_stream.append "select-hidden-recipient" do%>
+    <%= render "users/recipient_box_fields", index: Time.current.to_i, boxes: @boxes %>
+<%end%>

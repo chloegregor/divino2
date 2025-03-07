@@ -14,5 +14,4 @@ class Box < ApplicationRecord
     ["dividende", "user"]
   end
 
-
 end

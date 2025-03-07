@@ -17,7 +17,6 @@
 }
 
 #logo{
-  font-family: "EB Garamond", serif;
   font-size: 0.7em;
   margin-bottom: 0em;
   margin-top: 0em;
@@ -25,7 +24,6 @@
 }
 
 .tagline{
-  font-family: "EB Garamond", serif;
   font-size: 0.3em;
   color: #fefbba;
   margin: 0;
@@ -46,4 +44,19 @@
   color: #fefbba;
   margin-top: 10px;
   justify-content: end;
+}
+
+.login a{
+  text-decoration: none;
+  color: #fefbba;
+}
+
+.login a:hover{
+  color: #ffc925;
+}
+
+
+.container a{
+  text-decoration: none;
+  color: #333332
 }
