@@ -25,6 +25,9 @@ Rails.application.routes.draw do
       post "reject", to: "exchanges#rejected_exchanges"
     end
     resources :box_exchanges, only: [:new]
+    resources :deliveries, only: [:update]
+
+
   end
 
     get 'exchanges/load_boxes', to: 'exchanges#load_boxes'

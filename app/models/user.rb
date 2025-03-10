@@ -29,9 +29,7 @@ class User < ApplicationRecord
   private
 
   def create_delivery
-    if self.boxes.exist?
-      Delivery.create(user: self)
-    end
+    Delivery.create(user: self)
   end
 
 end

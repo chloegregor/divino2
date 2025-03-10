@@ -1,0 +1,10 @@
+<div class="bggrey">
+  <h4> delivery preferences</h4>
+  <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
+  <p>preferred delivery method :</p>
+  <%=f.select :delivery_method, ["pickup", "shipment"] %>
+  <p> (you can customize you delivery preferences for each of your boxes)</p>
+  <%= f.submit "save"%>
+  <%end%>
+
+</div>
