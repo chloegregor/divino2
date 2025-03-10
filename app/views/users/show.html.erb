@@ -23,35 +23,32 @@
 
     <div class="border-top display flex">
         <div class="width60">
-        <%@boxes.each do |vinyard, boxes|%>
-        <%=link_to vinyard_path(vinyard), class:"text-decoration black" do %>
-          <h4><%=vinyard.name%></h4>
-        <%end%>
           <div class="grid-box">
-            <%boxes.each do |box|%>
-              <%=link_to dividende_path(box.dividende), class:"text-decoration black" do%>
-                <div class="box">
-                  <div class="height100">
+            <%@non_exchangeable_boxes.each do |vinyard, boxes|%>
+                <%boxes.each do |box|%>
+                  <%=link_to dividende_path(box.dividende), class:"text-decoration black" do%>
+                    <div class="box">
+                      <div class="height100">
 
-                    <div class="vinyard-name align-center border-bottom">
-                      <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
-                    </div>
-                    <div class="vinyard-info flex space-between">
-                      <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
-                      <div class="name appellation">
-                          <% cuvee_colors.each do |cc| %>
-                            <p class="margin-top">
-                              <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
-                              </p>
-                          <%end%>
+                        <div class="vinyard-name align-center border-bottom">
+                          <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
+                        </div>
+                        <div class="vinyard-info flex space-between">
+                          <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
+                          <div class="name appellation">
+                              <% cuvee_colors.each do |cc| %>
+                                <p class="margin-top">
+                                  <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
+                                  </p>
+                              <%end%>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <% end %>
-            <%end%>
+                    <% end %>
+                <%end%>
+            <% end %>
           </div>
-        <% end %>
 
       </div>
       <% if current_user && @user.id != current_user.id%>

@@ -3,12 +3,12 @@ class Dividende < ApplicationRecord
   has_many :boxes, dependent: :destroy
   has_many :users, through: :boxes
   has_many :dividende_cuvee_colors, dependent: :destroy
-  has_many :cuvee_colors, through: :dividende_cuvee_colors, dependent: :destroy
+  has_many :cuvee_colors, through: :dividende_cuvee_colors
   has_many :cuvees, through: :cuvee_colors
   has_many :vinyard_appellations, through: :cuvees
 
   after_create :create_boxes
-  
+
   scope :current_year, -> { where(year: Time.current.year) }
 
   accepts_nested_attributes_for :dividende_cuvee_colors, allow_destroy: true
