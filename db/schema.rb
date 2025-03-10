@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -58,6 +58,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "exchangeable", default: false
+    t.string "delivery_method"
+    t.string "delivery_address"
     t.index ["dividende_id"], name: "index_boxes_on_dividende_id"
     t.index ["user_id"], name: "index_boxes_on_user_id"
   end
@@ -86,6 +89,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
     t.index ["vinyard_appellation_id"], name: "index_cuvees_on_vinyard_appellation_id"
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string "delivery_method", default: "pickup", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_deliveries_on_user_id"
+  end
+
   create_table "dividende_cuvee_colors", force: :cascade do |t|
     t.integer "bottle_quantity"
     t.integer "dividende_id", null: false
@@ -110,6 +121,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
     t.integer "initiator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stock_owners", force: :cascade do |t|
+    t.integer "vinyard_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
+    t.index ["user_id"], name: "index_stock_owners_on_user_id"
+    t.index ["vinyard_id"], name: "index_stock_owners_on_vinyard_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -149,9 +170,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_23_100056) do
   add_foreign_key "cuvee_colors", "colors"
   add_foreign_key "cuvee_colors", "cuvees"
   add_foreign_key "cuvees", "vinyard_appellations"
+  add_foreign_key "deliveries", "users"
   add_foreign_key "dividende_cuvee_colors", "cuvee_colors"
   add_foreign_key "dividende_cuvee_colors", "dividendes"
   add_foreign_key "dividendes", "vinyards"
+  add_foreign_key "stock_owners", "users"
+  add_foreign_key "stock_owners", "vinyards"
   add_foreign_key "vinyard_appellations", "appellations"
   add_foreign_key "vinyard_appellations", "vinyards"
 end
