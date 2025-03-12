@@ -26,8 +26,7 @@ Rails.application.routes.draw do
     end
     resources :box_exchanges, only: [:new]
     resources :deliveries, only: [:update]
-
-
+    resources :addresses, only: [:new, :create, :destroy]
   end
 
     get 'exchanges/load_boxes', to: 'exchanges#load_boxes'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_12_104327) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -23,6 +23,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "name"
+    t.string "street"
+    t.string "zip"
+    t.string "country"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -94,6 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_deliveries_on_address_id"
     t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
 
@@ -163,6 +177,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "users"
   add_foreign_key "box_exchanges", "boxes"
   add_foreign_key "box_exchanges", "exchanges"
   add_foreign_key "boxes", "dividendes"
@@ -170,6 +185,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_10_162323) do
   add_foreign_key "cuvee_colors", "colors"
   add_foreign_key "cuvee_colors", "cuvees"
   add_foreign_key "cuvees", "vinyard_appellations"
+  add_foreign_key "deliveries", "addresses"
   add_foreign_key "deliveries", "users"
   add_foreign_key "dividende_cuvee_colors", "cuvee_colors"
   add_foreign_key "dividende_cuvee_colors", "dividendes"

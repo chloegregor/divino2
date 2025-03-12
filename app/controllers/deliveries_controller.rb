@@ -1,6 +1,7 @@
 class DeliveriesController < ApplicationController
   def update
     @delivery = User.find(params[:user_id]).delivery
+
     if @delivery.update(delivery_params)
       flash[:success] = "Delivery updated"
       redirect_to user_path(current_user)
@@ -12,6 +13,6 @@ class DeliveriesController < ApplicationController
   private
 
   def delivery_params
-    params.require(:delivery).permit(:delivery_method)
+    params.require(:delivery).permit(:delivery_method, :address_id)
   end
 end

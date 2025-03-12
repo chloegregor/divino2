@@ -10,11 +10,14 @@ class User < ApplicationRecord
   has_many :stock_owners, dependent: :destroy
   has_many :vinyards, through: :stock_owners
   has_one :delivery, dependent: :destroy
+  has_many :addresses
   after_create :create_delivery
+
 
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :boxes, allow_destroy: true
 
   def self.ransackable_associations(auth_object = nil)
