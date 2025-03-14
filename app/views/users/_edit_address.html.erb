@@ -1,0 +1,9 @@
+<%= form_with model: address, url: user_address_path(address.user, address), method: :patch, data: { turbo_frame: dom_id(address) } do |f| %>
+  <%= f.text_field :title, placeholder: "Title of the address" %>
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.text_field :street, placeholder: "Street and n°" %>
+  <%= f.text_field :city, placeholder: "City"%>
+  <%= f.text_field :zip, placeholder: "ZIP code" %>
+  <%= f.text_field :country, placeholder: "Country" %>
+  <%= f.submit "Save" %>
+<% end %>

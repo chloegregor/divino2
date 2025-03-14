@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :stock_owners, dependent: :destroy
   has_many :vinyards, through: :stock_owners
   has_one :delivery, dependent: :destroy
-  has_many :addresses
+  has_many :addresses, dependent: :destroy
   after_create :create_delivery
 
 

@@ -1,27 +1,41 @@
 <div class="bggrey">
-  <h4> delivery preferences</h4>
-  <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
-    <p>preferred delivery method :</p>
-    <%=f.select :delivery_method, ["pickup", "shipment"] %>
-    <p> (you can customize you delivery preferences for each of your boxes)</p>
-    <%= f.select :address_id, @user.addresses.map {|address| [address.title, address.id]} %>
-    <%@user.addresses.each do |address|%>
-    <%=address.title%>
-    <%end%>
-    <%= f.submit "save"%>
-  <%end%>
-
-    <%= form_with model: @address, url:user_addresses_path(@user) do |f| %>
-
-
-      <div id="create_address"></div>
-
-      <%=button_tag "Add Address", formaction:new_user_address_path(@user), formmethod: :get, data:{ turbo_stream: true } %>
+  <div class="flex-column">
+    <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
+      <p>preferred delivery method :</p>
+      <p> (you can customize you delivery preferences for each of your boxes)</p>
+      <%=f.select :delivery_method, ["pickup", "shipment"] %>
+      <p>default address :</p>
+      <%= f.select :address_id, @user.addresses.map {|address| [address.title, address.id]}, {prompt: "select default address"}  %>
 
       <%= f.submit "save"%>
-
     <%end%>
+  </div>
+    <div class="addresses">
+      <%= @user.addresses.length%>
+      <%@user.addresses.each do |address|%>
+        <div class="address" id="<%= dom_id(address)%>">
+          <%=address.title%>
+          <%=address.id%>
+          <% if address.id.present?%>
+            <%= link_to "Edit", edit_user_address_path(@user, address), data: { turbo_stream: true } %>
+            <%= button_to "Delete", user_address_path(@user, address), method: :delete, data: { turbo_confirm: "Are you sure?", turbo_stream: true } %>
+          <% else%>
+            <p>prout</p>
+          <%end%>
+        </div>
+      <%end%>
+    </div>
+    <div>
+      <%= form_with model: Address.new, url:user_addresses_path(@user) do |f| %>
 
+        <div id="create_address"></div>
 
+        <%=button_tag "Add Address", formaction:new_user_address_path(@user), formmethod: :get, data:{ turbo_stream: true } %>
+
+        <%= f.submit "save"%>
+
+      <%end%>
+
+    </div>
 
 </div>

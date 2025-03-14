@@ -1,0 +1,7 @@
+<div>
+  <%= form_with model: @box, url: user_box_path(@user, @box), method: :patch do |f| %>
+    <%= f.label "#{@box.dividende.vinyard.name}"%>
+    <%=f.check_box :exchangeable %>
+    <%= f.submit "Save"%>
+  <%end%>
+</div>
