@@ -1,4 +1,4 @@
-<div>
+
 <%=fields_for :addresses, Address.new do |address| %>
   <%=address.text_field :title, placeholder: "title of the address" %>
   <%=address.text_field :name, placeholder: "name"%>
@@ -6,5 +6,7 @@
   <%=address.text_field :city, placeholder: "city"%>
   <%=address.text_field :zip, placeholder: "zip code"%>
   <%=address.text_field :country, placeholder: "country"%>
+  <div>
+    <%=address.submit "Save"%>
+  </div>
 <%end%>
-</div>

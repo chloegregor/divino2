@@ -167,3 +167,11 @@ p{
   margin: 10px 0;
   border-radius: 5px;
 }
+
+.address-title {
+  padding: 1em;
+  border-radius: 5px;
+  height: 20px;
+  align-items: center;
+
+}
