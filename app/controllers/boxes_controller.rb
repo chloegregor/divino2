@@ -10,6 +10,10 @@ class BoxesController < ApplicationController
   def update
     @box = Box.find(params[:id])
     if @box.update(box_params)
+      if @box.delivery_method == "pickup"
+        @box.update(address_id: nil)
+      end
+     
       flash[:success] = "Box updated!"
       redirect_to user_path(current_user)
     else
