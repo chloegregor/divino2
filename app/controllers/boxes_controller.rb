@@ -20,7 +20,7 @@ class BoxesController < ApplicationController
   private
 
   def box_params
-    params.require(:box).permit(:exchangeable, :delivery_method, :delivery_address)
+    params.require(:box).permit(:exchangeable, :delivery_method, :address_id)
   end
 
 end

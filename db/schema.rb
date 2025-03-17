@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_14_094015) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_17_142857) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -73,7 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_14_094015) do
     t.datetime "updated_at", null: false
     t.boolean "exchangeable", default: false
     t.string "delivery_method"
-    t.string "delivery_address"
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_boxes_on_address_id"
     t.index ["dividende_id"], name: "index_boxes_on_dividende_id"
     t.index ["user_id"], name: "index_boxes_on_user_id"
   end
@@ -181,6 +182,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_14_094015) do
   add_foreign_key "addresses", "users"
   add_foreign_key "box_exchanges", "boxes"
   add_foreign_key "box_exchanges", "exchanges"
+  add_foreign_key "boxes", "addresses"
   add_foreign_key "boxes", "dividendes"
   add_foreign_key "boxes", "users"
   add_foreign_key "cuvee_colors", "colors"

@@ -28,9 +28,10 @@
     <div>
       <%= form_with model: Address.new, url:user_addresses_path(@user) do |f| %>
 
-        <div id="create_address"></div>
+        <div id="create_address">
 
         <%=button_tag "Add Address", formaction:new_user_address_path(@user), formmethod: :get, data:{ turbo_stream: true } %>
+        </div>
 
         <%= f.submit "save"%>
 

@@ -4,6 +4,7 @@ class Box < ApplicationRecord
   has_one :vinyard, through: :dividende
   has_many :box_exchanges, dependent: :destroy
   has_many :exchanges, through: :box_exchanges
+  belongs_to :address, optional: true
 
 
   def self.ransackable_attributes(auth_object = nil)

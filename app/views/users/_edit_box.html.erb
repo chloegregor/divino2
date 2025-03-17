@@ -1,7 +1,12 @@
 <div>
   <%= form_with model: @box, url: user_box_path(@user, @box), method: :patch do |f| %>
-    <%= f.label "#{@box.dividende.vinyard.name}"%>
+    <p><%="#{@box.dividende.vinyard.name} #{@box.dividende.year}"%></p>
+    <%= f.label "Make this box available for exchange ?"%>
     <%=f.check_box :exchangeable %>
+    <%= f.select :delivery_method,
+    options_for_select(["pickup", "shipment"], @box.delivery_method) %>
+    <%=f.select :address_id, options_for_select(@user.addresses.map {|address| [address.title, address.id]}, @box.address_id) %>
+
     <%= f.submit "Save"%>
   <%end%>
 </div>
