@@ -19,4 +19,8 @@ export default class extends Controller {
       this.addressTarget.classList.remove("hidden");
     }
   }
+
+  close() {
+    this.element.style.display = "none"; // Cache la modale
+  }
 }

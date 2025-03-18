@@ -6,7 +6,7 @@ ActiveAdmin.register Vinyard do
                 cuvee_colors_attributes: [:id, :description, :color_id, :_destroy]
               ]
             ],
-            dividendes_attributes: [:id, :year, :_destroy,
+            dividendes_attributes: [:id, :year, :shipping_date, :_destroy,
               dividende_cuvee_colors_attributes: [:id, :cuvee_color_id, :bottle_quantity, :_destroy]
           ], stock_owners_attributes: [:id, :quantity, :_destroy, :user_id]
 
@@ -77,6 +77,7 @@ ActiveAdmin.register Vinyard do
 
     f.has_many :dividendes, heading: 'Dividendes', allow_destroy: true do |dividende|
       dividende.input :year
+      dividende.input :shipping_date, as: :datepicker
       dividende.has_many :dividende_cuvee_colors, heading: 'Bottle', allow_destroy: true do |dcc|
         cuvee_colors = CuveeColor.joins(cuvee: :vinyard_appellation).where(vinyard_appellations: { vinyard_id: f.object.id })
         dcc.input :cuvee_color_id, as: :select, collection: cuvee_colors.map { |cc| ["#{cc.cuvee.name} en #{cc.cuvee.vinyard_appellation.appellation.name} | #{cc.color.color}", cc.id] }, label: 'Choose Cuvee Color'

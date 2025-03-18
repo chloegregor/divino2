@@ -22,7 +22,7 @@
     </div>
 
     <div class="border-top display flex">
-        <div class="width60">
+        <div class="width60 relative">
           <div class="grid-box">
             <%@non_exchangeable_boxes.each do |vinyard, boxes|%>
                 <%boxes.each do |box|%>
@@ -48,17 +48,13 @@
                       </div>
                     <% end %>
                     <%= link_to "edit preferences", edit_user_box_path(@user, box), data: {turbo_stream: true}, id:"preferences" %>
-
                   </div>
                 <%end%>
-
             <% end %>
+            
           </div>
         <div id="modal" class="flex-column">
-          <div class="bg-white p-5 rounded shadow-lg">
 
-            <button class="closemodal">Fermer</button>
-          </div>
         </div>
 
       </div>

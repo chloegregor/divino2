@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_17_142857) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_18_084626) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_142857) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "shipping_date"
     t.index ["vinyard_id"], name: "index_dividendes_on_vinyard_id"
   end
 
@@ -177,6 +178,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_17_142857) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "shipping_date"
   end
 
   add_foreign_key "addresses", "users"

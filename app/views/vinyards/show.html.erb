@@ -24,38 +24,8 @@
         <p class="margin-top-none margin-bottom-none"><%=@vinyard.description%></p>
       </div>
     </div>
+    <%= render "dividendes/show_dividende"%>
     <div class="flex-column">
-    <h2 class="margin-bottom-none">Available boxes</h2>
-    <div class="grid-box">
-
-      <%@dividendes.each do |dividende|%>
-        <%=link_to dividende_path(dividende), class:"text-decoration black" do%>
-          <div class="box">
-              <div class="height100">
-                <div class="vinyard-name align-center border-bottom">
-                  <h3 class="name"><%= @vinyard.name %> <%=dividende.year%></h3>
-                </div>
-                <div class="vinyard-info flex space-between">
-                  <% cuvee_colors = dividende.dividende_cuvee_colors %>
-                    <div class="name appellation">
-                        <% cuvee_colors.each do |cc| %>
-                      <p class="margin-top-none margin-bottom-none">
-                        <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
-                      </p>
-                        <%end%>
-                    </div>
-                    <div class="name text-align-end">
-              <p class="margin-bottom-none margin-top-none">available : <%=dividende.boxes.length%></p>
-                    </div>
-
-
-                </div>
-              </div>
-
-            </div>
-        <%end%>
-      <%end%>
-    </div>
   </div>
   </div>
 </div>
