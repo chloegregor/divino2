@@ -196,3 +196,8 @@ p{
 .relative{
   position: relative;
 }
+
+
+.padding-bottom1{
+  padding-bottom: 1em;
+}

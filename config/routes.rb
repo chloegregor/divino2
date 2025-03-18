@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       post "accept", to: "exchanges#accepted_exchanges"
       post "reject", to: "exchanges#rejected_exchanges"
     end
-    resources :box_exchanges, only: [:new]
+    resources :box_exchanges, only: [:new, :destroy]
     resources :deliveries, only: [:update]
     resources :addresses, only: [:new, :create, :edit, :update, :destroy]
     resources :boxes, only: [:edit, :update]

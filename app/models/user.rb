@@ -21,7 +21,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :boxes, allow_destroy: true
 
   def self.ransackable_associations(auth_object = nil)
-    ["boxes", "dividendes", "exchanges_as_initator", "exchanges_as_recipient", "stock_owners", "vinyards"]
+    ["boxes", "dividendes", "exchanges_as_initator", "exchanges_as_recipient", "stock_owners", "vinyards", "delivery", "addresses"]
   end
 
   def self.ransackable_attributes(auth_object = nil)

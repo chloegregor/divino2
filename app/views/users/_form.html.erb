@@ -10,7 +10,7 @@
                 <div id="select-hidden-recipient">
                   <%= box_exchange.hidden_field :role, value: "recipient"%>
                   <%=box_exchange.select :box_id,
-                    @user.boxes.joins(:dividende)
+                    @user.boxes.where(exchangeable: true).joins(:dividende)
                  .where(dividende: { year: current_year }).map { |box| ["#{box.dividende.vinyard.name} - #{box.dividende.year}", box.id]},{prompt: "Choose a box"}, {class:"select-recipient"}%>
                 </div>
               <%end%>
@@ -22,9 +22,10 @@
                 <div id="select-hidden-initiator">
                   <%= box_exchange.hidden_field :role, value: "initiator"%>
                   <%=box_exchange.select :box_id,
-                      current_user.boxes.joins(:dividende)
+                      current_user.boxes.where(exchangeable: true).joins(:dividende)
                  .where(dividende: { year: current_year }).map { |box| ["#{box.dividende.vinyard.name} - #{box.dividende.year}", box.id]},{prompt: "Choose a box"}, {class:"select-initiator"} %>
                 </div>
+
               <%end%>
 <%= button_tag "Add boxes", formaction:new_user_box_exchange_path(@user), formmethod: :get, data: { turbo_stream: true }, name: "role", value: "initiator" %>
             </div>
