@@ -6,10 +6,14 @@
         <% if current_user.id != @user.id%>
         <h2><%=@user.pseudo%>'s cellar</h2>
         <%else%>
-        <div class="flex space-between">
-        <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
-        <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
-        </div>
+           <div class="flex space-between">
+            <%= link_to user_path(@user) do  %>
+            <h2 class="hover">My cellar</h2>
+            <%end%>
+          <%= link_to user_exchanges_path(@user) do%>
+            <h2 class="hover">My exchanges</h2>
+          <%end%>
+          </div>
         <%end%>
       <%else%>
         <h2><%=@user.pseudo%>'s cellar</h2>
@@ -71,7 +75,7 @@
                         <div class="absolute-20"><p class="margin0"><%=exchange.recipient.pseudo%>'s</p></div>
                         <% exchange.recipient_boxes.each do |box|%>
                           <div class=" width20em border align-center">
-                            <%=link_to dividende_path(box.dividende) do%>
+                            <%=link_to vinyard_path(box.vinyard) do%>
                               <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                             <%end%>
                           </div>
@@ -93,22 +97,32 @@
           <div class="flex-column gap2 margin-top2 margin-bottom2 padding-right1 padding-left1">
               <%@user_accepted_exchanges.each do |exchange|%>
                 <div class="flex gap2">
-                  <%user_boxes = exchange.boxes.where(user_id:@user)%>
-                  <%partner_boxes = exchange.boxes.where.not(user_id:@user)%>
                   <div class="flex-column gap1">
-                    <%user_boxes.each do |box|%>
+
+                    <% if exchange.initiator == @user%>
+                      <% my_previous_boxes = exchange.initiator_boxes%>
+                      <% their_previous_boxes = exchange.recipient_boxes%>
+                      <% their_pseudo = exchange.recipient.pseudo%>
+                    <%else%>
+                      <% my_previous_boxes = exchange.recipient_boxes%>
+                      <% their_previous_boxes = exchange.initiator_boxes%>
+                      <% their_pseudo = exchange.initiator.pseudo%>
+                    <%end%>
+
+
+                    <% my_previous_boxes.each do |box| %>
                       <div class="border width20em align-center">
                         <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                       </div>
                     <%end%>
                   </div>
                   <div class="relative">
-                    <%if partner_boxes.any?%>
-                      <div class="absolute-20"><p class="margin0"><%=partner_boxes.first.user.pseudo%>'s<p></div>
+                    <%if their_previous_boxes.any?%>
+                      <div class="absolute-20"><p class="margin0">previously <%=their_pseudo%>'s<p></div>
                     <%end%>
-                    <%partner_boxes.each do |box|%>
+                    <%their_previous_boxes.each do |box|%>
                       <div class="border width20em align-center">
-                        <%=link_to dividende_path(box.dividende) do%>
+                        <%=link_to vinyard_path(box.vinyard) do%>
                           <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                         <%end%>
                       </div>
@@ -141,7 +155,7 @@
                           </div>
                           <% exchange.recipient_box_exchanges.each do |box|%>
                             <div class="border width20em align-center">
-                              <%=link_to dividende_path(box.box.dividende) do%>
+                              <%=link_to vinyard_path(box.box.vinyard) do%>
                                 <p> <%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
                               <%end%>
                             </div>

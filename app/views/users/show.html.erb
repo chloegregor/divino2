@@ -5,15 +5,19 @@
       <%if current_user%>
         <% if current_user.id != @user.id%>
         <div class="flex space-between">
-          <h2><%=@user.pseudo%>'s cellar</h2>
-          <%= link_to user_path(current_user) do%>
-            <h2>my cellar</h2>
+          <h3 class="margin0"><%=@user.pseudo%>'s cellar</h3>
+          <%= link_to user_path(current_user), class:"fit-content align-flex-end" do%>
+            <h2 class="hover">my cellar</h2>
           <%end%>
           </div>
         <%else%>
           <div class="flex space-between">
-            <h2><%= link_to "My cellar", user_path(@user),class:"text-decoration black"  %></h2>
-            <h2><%= link_to "Exchanges", user_exchanges_path(@user), class:"text-decoration black" %></h2>
+            <%= link_to user_path(@user), class:"height-fit-content" do  %>
+            <h3 class="margin0 hover">My cellar</h3>
+            <%end%>
+          <%= link_to user_exchanges_path(@user), class:"fit-content align-flex-end" do%>
+            <h2 class="hover">My exchanges</h2>
+          <%end%>
           </div>
         <%end%>
       <%else%>
@@ -22,38 +26,86 @@
     </div>
 
     <div class="border-top display flex">
-        <div class="width60">
-          <div class="grid-box">
-            <%@non_exchangeable_boxes.each do |vinyard, boxes|%>
-                <%boxes.each do |box|%>
-                  <%=link_to dividende_path(box.dividende), class:"text-decoration black" do%>
-                    <div class="box">
-                      <div class="height100">
+        <div class="width60 relative">
+            <div class="margin-bottom2 margin-top2">Available for exchange</div>
+              <div class="grid-box border-bottom margin-bottom2 margin-top2 padding-bottom1">
+                <%@exchangeable_boxes.each do |vinyard, boxes|%>
+                    <%boxes.each do |box|%>
+                      <div class="">
 
-                        <div class="vinyard-name align-center border-bottom">
-                          <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
-                        </div>
-                        <div class="vinyard-info flex space-between">
-                          <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
-                          <div class="name appellation">
-                              <% cuvee_colors.each do |cc| %>
-                                <p class="margin-top">
-                                  <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
-                                  </p>
+                          <div class="box">
+                            <div class="height100">
+
+                              <div class="vinyard-name align-center border-bottom">
+                                <%=link_to vinyard_path(vinyard) do%>
+                                  <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
+                                <%end%>
+                              </div>
+                              <div class="vinyard-info flex space-between">
+                                <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
+                                <div class="name appellation">
+                                    <% cuvee_colors.each do |cc| %>
+                                      <p class="margin-top
+                                      ">
+                                        <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
+                                        </p>
+                                    <%end%>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <%if @user == current_user%>
+                            <%= link_to "edit preferences", edit_user_box_path(@user, box), data: {turbo_stream: true}, id:"preferences" %>
+                          <%end%>
+
+                      </div>
+                    <%end%>
+                <% end %>
+              </div>
+
+            <div class="margin-top2">other boxes</div>
+              <div class="grid-box margin-bottom2 margin-top2 padding-bottom1">
+                <%@non_exchangeable_boxes.each do |vinyard, boxes|%>
+                  <%boxes.each do |box|%>
+                    <div class="">
+                        <div class="box">
+                          <div class="height100">
+
+                            <div class="vinyard-name align-center border-bottom">
+                              <%=link_to vinyard_path(vinyard) do%>
+                                <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
                               <%end%>
+                            </div>
+                            <div class="vinyard-info flex space-between">
+                              <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
+                              <div class="name appellation">
+                                  <% cuvee_colors.each do |cc| %>
+                                    <p class="margin-top">
+                                      <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
+                                      </p>
+                                  <%end%>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <% end %>
-                <%end%>
-            <% end %>
-          </div>
 
-      </div>
-      <% if current_user && @user.id != current_user.id%>
-        <%= render "users/form"%>
-      <%end%>
+                      <%if @user == current_user%>
+                        <%= link_to "edit preferences", edit_user_box_path(@user, box), data: {turbo_stream: true}, id:"preferences" %>
+                      <%end%>
+                    </div>
+                  <%end%>
+                <%end %>
+              </div>
+              <div id="modal" class="flex-column">
+              </div>
+            </div>
+            <% if current_user && @user.id != current_user.id%>
+              <%= render "users/form"%>
+              <%elsif current_user && @user.id = current_user.id%>
+                <%= render "users/delivery_form"%>
+              <%else%>
+              <%= render "users/invite"%>
+            <%end%>
     </div>
   </div>
 </div>

@@ -10,15 +10,18 @@ class User < ApplicationRecord
   has_many :stock_owners, dependent: :destroy
   has_many :vinyards, through: :stock_owners
   has_one :delivery, dependent: :destroy
+  has_many :addresses, dependent: :destroy
   after_create :create_delivery
+
 
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
+  accepts_nested_attributes_for :addresses, allow_destroy: true
   accepts_nested_attributes_for :boxes, allow_destroy: true
 
   def self.ransackable_associations(auth_object = nil)
-    ["boxes", "dividendes", "exchanges_as_initator", "exchanges_as_recipient", "stock_owners", "vinyards"]
+    ["boxes", "dividendes", "exchanges_as_initator", "exchanges_as_recipient", "stock_owners", "vinyards", "delivery", "addresses"]
   end
 
   def self.ransackable_attributes(auth_object = nil)
@@ -29,9 +32,7 @@ class User < ApplicationRecord
   private
 
   def create_delivery
-    if self.boxes.exist?
-      Delivery.create(user: self)
-    end
+    Delivery.create(user: self)
   end
 
 end

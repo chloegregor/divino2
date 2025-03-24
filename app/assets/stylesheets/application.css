@@ -17,7 +17,7 @@
 
  body{
    margin: 0 0 3em 0;
-   background: #fffbf2;
+   background: #fdfdfd;
    font-family: "Inter", sans-serif;
  }
 
@@ -26,6 +26,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.justify-center{
+  display: flex;
+  justify-content: center;
 }
 
 .border-bottom{
@@ -68,6 +73,10 @@
   text-decoration: none;
 }
 
+#text-decoration2 {
+  text-decoration: underline !important;
+}
+
 .black{
   color: black;
 }
@@ -93,6 +102,9 @@
   gap: 2em;
 }
 
+.gap4{
+  gap: 4em;
+}
 .margin0{
   margin: 0;
 }
@@ -122,9 +134,20 @@ p{
   width: 20em;
 }
 
+.width50{
+  width: 50%;
+}
 .bggrey{
-  background-color: #f7f2e8;
+  background-color: rgba(128, 128, 128, 0.13);
 
+}
+
+.margin-top1{
+  margin-top: 1em;
+}
+
+.margin-bottom1{
+  margin-bottom: 1em;
 }
 
 .margin-top2{
@@ -161,9 +184,94 @@ p{
 
 /* application.css */
 .flash-success {
-  background-color: #4CAF50;  /* Couleur de fond verte pour le succès */
+  background-color: hsl(122, 39%, 49%);  /* Couleur de fond verte pour le succès */
   color: white;
   padding: 15px;
   margin: 10px 0;
   border-radius: 5px;
+  z-index: 10000;
+  width:10%;
+  position: fixed;
+  top: 50%;
+  right: 50%;
+
+}
+
+.elementToFadeInAndOut {
+
+  animation: fadeinout 2s ease-in-out 1;
+  opacity: 1;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadeinout {
+50% { opacity: 0; }
+}
+
+.address-title {
+  padding: 1em;
+  border-radius: 5px;
+  height: 20px;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+
+}
+
+.modale{
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 40%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+  box-shadow: 1px 1px 20px;
+  padding:2em;
+}
+
+.relative{
+  position: relative;
+}
+
+
+.padding-bottom1{
+  padding-bottom: 1em;
+}
+
+.disable-outside-clik{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.red{
+  color: red;
+}
+
+.align-flex-end{
+  align-self: flex-end;
+}
+
+.height-fit-content{
+height: fit-content;
+}
+
+
+.center{
+margin: 0 auto;
+}
+
+.flex-end{
+  justify-content: flex-end;
+}
+
+.hover:hover{
+  color: #afafaf;
 }

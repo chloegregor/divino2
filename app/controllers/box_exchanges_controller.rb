@@ -10,12 +10,12 @@ puts "Params: #{params.inspect}"
 
 
     if @role == "initiator"
-      @boxes = current_user.boxes.joins(:dividende)
-      .where(dividende: { year: current_year })
+      @boxes = current_user.boxes.where(exchangeable: true).includes(:dividende)
+      .where(dividendes: { year: current_year })
       render 'box_exchanges/new_initiator'
     elsif @role == "recipient"
-      @boxes = User.find(params[:user_id]).boxes.joins(:dividende)
-      .where(dividende: { year: current_year })
+      @boxes = User.find(params[:user_id]).boxes.where(exchangeable: true).includes(:dividende)
+      .where(dividendes: { year: current_year })
       render 'box_exchanges/new_recipient'
     end
 

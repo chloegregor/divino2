@@ -6,7 +6,7 @@ ActiveAdmin.register Vinyard do
                 cuvee_colors_attributes: [:id, :description, :color_id, :_destroy]
               ]
             ],
-            dividendes_attributes: [:id, :year, :_destroy,
+            dividendes_attributes: [:id, :year, :shipping_date, :_destroy,
               dividende_cuvee_colors_attributes: [:id, :cuvee_color_id, :bottle_quantity, :_destroy]
           ], stock_owners_attributes: [:id, :quantity, :_destroy, :user_id]
 
@@ -16,19 +16,15 @@ ActiveAdmin.register Vinyard do
     column "appellation(s)", :vinyard_appellations, label: "appellation(s)" do |vinyard|
       vinyard.vinyard_appellations.map { |va| va.appellation.name }.join(', ').html_safe
     end
+    column "address", :address
     actions
   end
 
   show do
     attributes_table do
       row :name
+      row :address
       row :description
-      row :appellations do |vinyard|
-        vinyard.appellations.size
-      end
-      row :cuvee do |vinyard|
-        vinyard.cuvee_colors.size
-      end
     end
     vinyard.vinyard_appellations.each do |va|
       panel "Appellation #{va.appellation.name}" do
@@ -57,11 +53,22 @@ ActiveAdmin.register Vinyard do
         end
       end
     end
+    panel 'Stock Owners' do
+      table_for vinyard.stock_owners do
+        column 'User' do |so|
+          so.user.email
+        end
+        column 'Quantity' do |so|
+          so.quantity
+        end
+      end
+    end
   end
 
   form do |f|
     f.inputs 'Vinyard' do
       f.input :name, label:  'Name'
+      f.input :address, label: 'Address'
       f.input :description
     end
     f.has_many :vinyard_appellations, heading: 'Appellations', allow_destroy: true do |va|
@@ -77,16 +84,12 @@ ActiveAdmin.register Vinyard do
 
     f.has_many :dividendes, heading: 'Dividendes', allow_destroy: true do |dividende|
       dividende.input :year
+      dividende.input :shipping_date, as: :datepicker
       dividende.has_many :dividende_cuvee_colors, heading: 'Bottle', allow_destroy: true do |dcc|
         cuvee_colors = CuveeColor.joins(cuvee: :vinyard_appellation).where(vinyard_appellations: { vinyard_id: f.object.id })
         dcc.input :cuvee_color_id, as: :select, collection: cuvee_colors.map { |cc| ["#{cc.cuvee.name} en #{cc.cuvee.vinyard_appellation.appellation.name} | #{cc.color.color}", cc.id] }, label: 'Choose Cuvee Color'
         dcc.input :bottle_quantity
       end
-    end
-
-    f.has_many :stock_owners, heading: 'Stock Owners', allow_destroy: true do |so|
-      so.input :user_id, as: :select, collection: User.all.map { |user| [user.email, user.id] }, label: 'Choose User'
-      so.input :quantity
     end
 
     f.actions

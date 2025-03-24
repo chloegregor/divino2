@@ -14,7 +14,7 @@ class Dividende < ApplicationRecord
   accepts_nested_attributes_for :dividende_cuvee_colors, allow_destroy: true
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "id_value", "year", "updated_at", "vinyard_id"]
+    ["created_at", "id", "id_value", "shipping_date","year", "updated_at", "vinyard_id"]
   end
 
   def self.ransackable_associations(auth_object = nil)

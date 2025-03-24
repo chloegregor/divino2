@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     current_year = Time.current.year
-
-    # Filtrer les boîtes qui sont associées à des dividendes de l'année en cours
     @non_exchangeable_boxes = @user.boxes.where(exchangeable: false)
                  .joins(:dividende)
                  .where(dividende: { year: current_year })
@@ -17,6 +15,13 @@ class UsersController < ApplicationController
                  .group_by(&:vinyard)
     @exchange = Exchange.new
     @exchange.box_exchanges.build
+    @delivery = @user.delivery
+    if @user.addresses.any?
+      @addresses = @user.addresses
+    end
+    if @delivery.address
+        @delivery_address = @delivery.address
+    end
   end
 
 
