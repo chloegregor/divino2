@@ -16,6 +16,30 @@ ActiveAdmin.register StockOwner do
   # end
   permit_params :vinyard_id, :user_id, :quantity
 
+  index do
+    selectable_column
+    id_column
+    column :vinyard
+    column :user
+    column :quantity
+    actions
+  end
+
+
+  show do
+    attributes_table do
+      row :vinyard
+      row :user
+      row :quantity
+      row :boxes do
+        stock_owner.boxes.each do |box|
+          link_to box.id, admin_box_path(box)
+        end
+      end
+
+    end
+  end
+
   form do |f|
     f.inputs do
       f.input :vinyard

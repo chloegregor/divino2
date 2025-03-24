@@ -1,8 +1,7 @@
 .banner{
-  background-color: #93679e;
+  background-color: #8c002a;
   font-size: 2em;
-  color: #fefbba;
-  height: 2em;
+
 
 }
 
@@ -13,19 +12,19 @@
 
 #logo a{
   text-decoration: none;
-  color: #fefbba;
+  color: #a30000;
 }
 
 #logo{
-  font-size: 0.7em;
+  font-size: 3em;
   margin-bottom: 0em;
   margin-top: 0em;
 
 }
 
 .tagline{
-  font-size: 0.3em;
-  color: #fefbba;
+  font-size: 1em;
+  color: #a30000;
   margin: 0;
 
 
@@ -33,26 +32,26 @@
 
 .log{
   font-family: "Inter", sans-serif;
-  font-size: 0.4em;
-  color: #fefbba;
+  font-size: 1em;
+  color: #a30000;
   margin: 0;
   justify-content: end;
 }
 
 .login{
   font-family: "Inter", sans-serif;
-  color: #fefbba;
-  margin-top: 10px;
-  justify-content: end;
+  color: #a30000;
+  display: flex;
+  gap:2em;
 }
 
 .login a{
   text-decoration: none;
-  color: #fefbba;
+  color: #a30000;
 }
 
 .login a:hover{
-  color: #ffc925;
+  color: #520000;
 }
 
 

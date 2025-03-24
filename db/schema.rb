@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_18_084626) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_20_201333) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -74,8 +74,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_084626) do
     t.boolean "exchangeable", default: false
     t.string "delivery_method"
     t.integer "address_id"
+    t.integer "stock_owner_id", null: false
     t.index ["address_id"], name: "index_boxes_on_address_id"
     t.index ["dividende_id"], name: "index_boxes_on_dividende_id"
+    t.index ["stock_owner_id"], name: "index_boxes_on_stock_owner_id"
     t.index ["user_id"], name: "index_boxes_on_user_id"
   end
 
@@ -179,6 +181,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_084626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "shipping_date"
+    t.string "address"
   end
 
   add_foreign_key "addresses", "users"
@@ -186,6 +189,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_18_084626) do
   add_foreign_key "box_exchanges", "exchanges"
   add_foreign_key "boxes", "addresses"
   add_foreign_key "boxes", "dividendes"
+  add_foreign_key "boxes", "stock_owners"
   add_foreign_key "boxes", "users"
   add_foreign_key "cuvee_colors", "colors"
   add_foreign_key "cuvee_colors", "cuvees"

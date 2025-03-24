@@ -16,8 +16,12 @@ class UsersController < ApplicationController
     @exchange = Exchange.new
     @exchange.box_exchanges.build
     @delivery = @user.delivery
-    @addresses = @user.addresses
-    @delivery_address = @delivery.address
+    if @user.addresses.any?
+      @addresses = @user.addresses
+    end
+    if @delivery.address
+        @delivery_address = @delivery.address
+    end
   end
 
 

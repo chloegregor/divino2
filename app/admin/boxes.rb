@@ -7,16 +7,22 @@ ActiveAdmin.register Box do
     column :user_email do |box|
       box.user.email
     end
-    column :user_pseudo do |box|
-      box.user.pseudo
-    end
+
     column :dividende do |box|
       "#{box.dividende.vinyard.name} #{box.dividende.year}"
     end
 
-    column :delivery_address do |box|
-      box.user.delivery_address
+    column :delivery_method do |box|
+      box.delivery_method
     end
+    column :delivery_address do |box|
+      box.address ? "#{box.address.name} - #{box.address.street}, #{box.address.zip} #{box.address.city}, #{box.address.country}": "No address"
+    end
+
+    column "date of delivery" do |box|
+      box.dividende.shipping_date
+    end
+
     actions
   end
 
@@ -25,14 +31,15 @@ ActiveAdmin.register Box do
       row :user_email do |box|
         box.user.email
       end
-      row :user_pseudo do |box|
-        box.user.pseudo
-      end
       row :dividende do |box|
         "#{box.dividende.vinyard.name} #{box.dividende.year}"
       end
+      row :delivery_method do |box|
+        box.delivery_method
+      end
+
       row :delivery_address do |box|
-        box.user.delivery_address
+        box.address ? "#{box.address.name} - #{box.address.street}, #{box.address.zip} #{box.address.city}, #{box.address.country}" : "No address"
       end
       table do
         thead do
@@ -69,6 +76,22 @@ ActiveAdmin.register Box do
     f.actions
   end
 
+  csv do
+    column :id
+    column :user_email do |box|
+      box.user.email
+    end
+    column :dividende do |box|
+      "#{box.dividende.vinyard.name} #{box.dividende.year}"
+    end
+    column :delivery_method do |box|
+      box.delivery_method
+    end
+    column :delivery_address do |box|
+      box.address ? "#{box.address.name} - #{box.address.street}, #{box.address.zip} #{box.address.city}, #{box.address.country}" : "No address"
+    end
+  end
+
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -88,6 +111,7 @@ ActiveAdmin.register Box do
   filter :user_pseudo, as: :string
   filter :dividende_vinyard_name, as: :select, collection: -> { Vinyard.distinct.pluck(:name).sort }
   filter :dividende_year, as: :select, collection: -> { Dividende.distinct.pluck(:year).sort.reverse }
+  filter :delivery_method, as: :select, collection: -> { Box.distinct.pluck(:delivery_method) }
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

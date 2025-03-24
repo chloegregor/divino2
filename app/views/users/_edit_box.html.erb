@@ -1,28 +1,42 @@
-<div data-controller="preferences" class="modale" >
-  <%= form_with model: @box, url: user_box_path(@user, @box), method: :patch do |f| %>
-    <div class="flex-column gap2">
-      <div>
-        <p><%="#{@box.dividende.vinyard.name} #{@box.dividende.year}"%> <br> shipping date: <%="#{@box.dividende.shipping_date.strftime("%d %B %Y")}"%></p>
-      </div>
-      <div class="flex gap1">
-        <%= f.label "Make this box available for exchange ?"%>
-        <%=f.check_box :exchangeable %>
-      </div>
-      <div class="flex gap1">
+<div data-controller="preferences" class="disable-outside-clik">
+  <div class="modale justify-center" >
+    <%= form_with model: @box, url: user_box_path(@user, @box), method: :patch do |f| %>
+      <div class="flex-column height100 space-between">
         <div>
-          <%=f.label "delivery method:"%>
-          <%= f.select :delivery_method,
-          options_for_select(["pickup", "shipment"], @box.delivery_method), {}, data: { action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"}%>
+          <p><%="#{@box.dividende.vinyard.name} #{@box.dividende.year}"%> <br> pick-up/delivery date: <%="#{@box.dividende.shipping_date.strftime("%d %B %Y")}"%></p>
+
+          <div id=vinyard-address data-preferences-target="vinyardAddress" class="hidden">
+            <p>pickup address: <%=@box.vinyard.address%></p>
+          </div>
         </div>
-        <div id="address-select" data-preferences-target="address">
-          <%=f.label "delivery address:"%>
-          <%=f.select :address_id, options_for_select(@user.addresses.map {|address| [address.title, address.id]}, @box.address_id) %>
+        <div class="flex-column gap2">
+          <div class="flex gap1">
+            <%= f.label "Make this box available for exchange ?"%>
+            <%=f.check_box :exchangeable %>
+          </div>
+          <div class="flex gap1">
+            <div class="flex gap1">
+              <%=f.label "delivery method:"%>
+              <div>
+                <%= f.select :delivery_method,
+                options_for_select(["pickup", "shipment"], @box.delivery_method), {}, data: { action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"}%>
+              </div>
+            </div>
+            <div class="width">
+              <div id="address-select" data-preferences-target="address" class="flex gap1">
+                <%=f.label "delivery address:"%>
+                <div>
+                  <%=f.select :address_id, options_for_select(@user.addresses.map {|address| [address.title, address.id]}, @box.address_id) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap1">
+            <%= f.submit "Save"%>
+            <button class="closemodal" type="button" data-action="click->preferences#close">Fermer</button>
+          </div>
         </div>
       </div>
-      <div class="flex gap1">
-        <%= f.submit "Save"%>
-        <button class="closemodal" type="button" data-action="click->preferences#close">Fermer</button>
-      </div>
-    </div>
-  <%end%>
+    <%end%>
+  </div>
 </div>

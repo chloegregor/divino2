@@ -1,15 +1,15 @@
-<div class="banner">
-  <div class="container-banner flex space-between">
-    <div class="id">
+
+  <div class="container-banner flex space-between margin-top2 ">
+    <div class="id flex-column center ">
       <h1 id=logo><%= link_to "Divino", root_path %></h1>
-      <p class="tagline">échange de caisses entre particuliers</p>
+      <p class="tagline align-flex-end">wine swap</p>
     </div>
 
       <%if user_signed_in? %>
-        <div class=" login ">
+        <div class="login flex-end">
           <% currentuserpseudo = current_user.pseudo %>
-          <%=link_to "Bonjour #{currentuserpseudo}", user_path(current_user), class:"text-decoration log"%>
-          <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class:"text-decoration log" %>
+          <%=link_to "hi #{currentuserpseudo}", user_path(current_user), class:"text-decoration log"%>
+          <%= link_to "Disconnect", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class:"text-decoration log" %>
         </div>
       <%else%>
         <div class="login">
@@ -19,4 +19,3 @@
       <%end%>
 
   </div>
-</div>

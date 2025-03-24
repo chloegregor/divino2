@@ -1,34 +1,41 @@
-  <div class="border-top display">
-    <h3>Box <%=@dividende.year%></h3>
-    <div class="flex">
-      <div class="border width40">
-        <%@bottles.each_with_index do |bottle,index|%>
-          <div class="bottle padding">
-            <div class="flex">
-              <p><%=bottle.bottle_quantity%>x <%=bottle.cuvee_color.cuvee.name%> <%=bottle.cuvee_color.cuvee.vinyard_appellation.appellation.name%></p>
-            </div>
-            <p><%=bottle.cuvee_color.description%></p>
-          </div>
-          <%if index != @bottles.size-1%>
-         <div class="border-top"></div>
-         <% end %>
+  <div class="border-top margin-top2 display flex gap4">
 
-        <%end%>
+      <div class="width50 margin-top2">
+        <h2>Box <%=@dividende.year%></h2>
+        <div class="flex gap1">
+          <div class="border">
+            <%@bottles.each_with_index do |bottle,index|%>
+              <div class="bottle padding">
+                <div class="flex gap1">
+                  <p><%=bottle.bottle_quantity%>x <%=bottle.cuvee_color.cuvee.name%> <%=bottle.cuvee_color.cuvee.vinyard_appellation.appellation.name%></p>
+                  <p>- <%=bottle.cuvee_color.color.color%></p>
+                </div>
+                <p><%=bottle.cuvee_color.description%></p>
+              </div>
+              <%if index != @bottles.size-1%>
+            <div class="border-top"></div>
+            <% end %>
+
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+      <div class="users margin-top2">
+        <h4>Who has this box ?</h4>
+        <div class="flex gap05">
+          <%if @users.length > 0%>
+            <%@users.each_with_index do |user, index|%>
+              <%=link_to user_path(user), class:"black" do %>
+                <div class="user">
+                  <p><%=user.pseudo%><%="," unless index == @users.size-1%></p>
+                </div>
+              <%end%>
+            <% end %>
+          <%else%>
+            <p class="italic">Nobody wants to echange this box yet.</p>
+          <%end%>
 
       </div>
     </div>
-      <div class="users">
-        <h4>Who has this box ?</h4>
-        <div class="flex gap05">
-          <%users = @users.uniq%>
-          <%users.each_with_index do |user, index|%>
-            <%=link_to user_path(user), class:"black" do %>
-              <div class="user">
-                <p><%=user.pseudo%><%="," unless index == users.size-1%></p>
-              </div>
-            <%end%>
-          <% end %>
-
-      </div>
-  </div>
 </div>

@@ -12,20 +12,20 @@
 
   <body>
     <!-- application.html.erb -->
-<% if flash[:success] %>
-  <div id="flash-success" class="flash flash-success">
-    <%= flash[:success] %>
-  </div>
-  <script>
-    // Affiche une alerte de succès via JavaScript
-    setTimeout(function() {
-      var successMessage = document.getElementById('flash-success');
-      if (successMessage) {
-        successMessage.style.display = 'none';  // Masque le message après un délai
-      }
-    }, 3000);  // 5 secondes avant de cacher le message
-  </script>
-<% end %>
+  <% if flash[:success] %>
+    <div id="flash-success" class="flash-success elementToFadeInAndOut ">
+      <%= flash[:success] %>
+    </div>
+    <script>
+      // Affiche une alerte de succès via JavaScript
+      setTimeout(function() {
+        var successMessage = document.getElementById('flash-success');
+        if (successMessage) {
+          successMessage.style.display = 'none';  // Masque le message après un délai
+        }
+      }, 1000);  // 5 secondes avant de cacher le message
+    </script>
+  <% end %>
 
     <%= yield %>
   </body>

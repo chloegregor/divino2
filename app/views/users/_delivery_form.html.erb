@@ -2,7 +2,7 @@
   <div class="flex-column padding" data-controller="preferences">
     <div class="delivery margin-bottom2">
       <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
-        <div class= "flex-column gap2">
+        <div class= "flex-column gap2 border-bottom">
           <div class>
             <div class="flex gap1">
               <p>preferred delivery method :</p>
@@ -14,9 +14,9 @@
             <%= f.select :address_id, @user.addresses.map {|address| [address.title, address.id]}, {prompt: "select default address"}  %>
           </div>
           <div>
-          <p class="italic"> (you can customize you delivery preferences for each of your boxes)</p>
 
           <%= f.submit "save"%>
+          <p class="italic margin-top1 margin-bottom1"> you can customize you delivery preferences for each of your boxes</p>
           </div>
         </div>
       <%end%>

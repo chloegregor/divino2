@@ -3,11 +3,10 @@
 <div class="container">
   <div class="menu">
     <div class="flex space-between">
-      <h2 class="category">explore vinyards</h2>
-      <h2>explore boxes</h2>
+      <h3 class="margin0">explore vineyards</h3>
       <%if current_user%>
-        <%=link_to user_path(current_user) do %>
-          <h2>my cellar</h2>
+        <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
+          <h2 class="hover">my cellar</h2>
         <%end%>
       <%end%>
     </div>
@@ -31,7 +30,7 @@
                     </p>
                   </div>
                   <div class="name text-align-end">
-                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.dividendes.current_year.includes(:boxes).flat_map(&:boxes).uniq.length %></p>
+                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.dividendes.current_year.includes(:boxes).flat_map{ |d| d.boxes.where(exchangeable: true) }.uniq.length %></p>
                   </div>
 
 
@@ -43,5 +42,3 @@
       </div>
     </div>
   </div>
-
-<%= render "shared/footer"%>

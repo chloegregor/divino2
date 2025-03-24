@@ -7,8 +7,10 @@ ActiveAdmin.register User do
   index do
     selectable_column
     column :pseudo
-    column :delivery_address
     column :email
+    column :delivery_address do |user|
+      user.delivery && user.delivery.address ? "#{user.delivery.address.name} - #{user.delivery.address.street}, #{user.delivery.address.zip} #{user.delivery.address.city}, #{user.delivery.address.country}": "No address"
+    end
     actions
   end
 
