@@ -2,16 +2,23 @@ class DeliveriesController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @delivery = @user.delivery
-    @boxes_to_be_delivered = @user.boxes.where(exchangeable: false)
+    @boxes_to_be_delivered = @user.boxes
 
     if @delivery.update(delivery_params)
-      if @delivery.delivery_method == "pickup"
-        @boxes_to_be_delivered.update_all(delivery_method: "pickup", address_id: nil)
+      if @boxes_to_be_delivered.any?
+        if @delivery.delivery_method == "pickup"
+          @boxes_to_be_delivered.update_all(delivery_method: "pickup", address_id: nil)
+
+        else
+          @boxes_to_be_delivered.update_all(delivery_method: "shipment", address_id: @delivery.address_id)
+
+        end
+        flash[:success] = "Delivery preferences updated boxes"
+        redirect_to user_path(current_user)
       else
-        @boxes_to_be_delivered.update_all(delivery_method: "shipment", address_id: @delivery.address_id)
+        flash[:success] = "Delivery preferences updated"
+        redirect_to user_path(current_user)
       end
-      flash[:success] = "Delivery updated"
-      redirect_to user_path(current_user)
     else
       render :edit, status: :unprocessable_entity
     end

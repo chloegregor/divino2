@@ -20,11 +20,13 @@ class StockOwner < ApplicationRecord
     boxes = []
     self.quantity.times do
     boxes <<  Box.create(user: self.user, vinyard: self.vinyard, stock_owner: self, dividende: latest_dividende)
-      if self.delivery.address.present?
+      if self.user.delivery.address.present?
+        puts "address present"
         boxes.each do |box|
-        box.update(address_id: self.delivery.address, delivery_method: self.delivery.delivery_method)
+        box.update(address: self.user.delivery.address, delivery_method: self.user.delivery.delivery_method)
         end
       else
+        puts "address not present"
         boxes.each do |box|
         box.update(delivery_method: self.delivery.delivery_method)
         end

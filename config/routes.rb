@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # get 'box_echanges/new'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

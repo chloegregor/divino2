@@ -1,7 +1,7 @@
 <%= render "shared/header"%>
 <div class="container" data-controller="exchange">
   <div class="flex-column">
-    <div class="margin-bottom-none">
+    <div class="margin-bottom-none padding-bottom1">
       <%if current_user%>
         <% if current_user.id != @user.id%>
         <h2><%=@user.pseudo%>'s cellar</h2>

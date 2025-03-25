@@ -1,28 +1,7 @@
 <div class="bggrey">
   <div class="flex-column padding" data-controller="preferences">
-    <div class="delivery margin-bottom2">
-      <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
-        <div class= "flex-column gap2 border-bottom">
-          <div class>
-            <div class="flex gap1">
-              <p>preferred delivery method :</p>
-            <%=f.select :delivery_method, ["pickup", "shipment"], {}, data: {action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"} %>
-            </div>
-          </div>
-          <div id="address-select" data-preferences-target="address" class= "flex gap1">
-          <p>Choose default address :</p>
-            <%= f.select :address_id, @user.addresses.map {|address| [address.title, address.id]}, {prompt: "select default address"}  %>
-          </div>
-          <div>
-
-          <%= f.submit "save"%>
-          <p class="italic margin-top1 margin-bottom1"> you can customize you delivery preferences for each of your boxes</p>
-          </div>
-        </div>
-      <%end%>
-    </div>
-    <div class="addresses flex-column gap2">
-      <div class="list flex-column gap1">
+    <div class="addresses flex-column gap2 border-bottom margin-bottom2">
+      <div class="list flex-column gap1 ">
         <% if @user.addresses.length > 0%>
         <p>registered addresses :</p>
           <%@user.addresses.each do |address|%>
@@ -40,7 +19,7 @@
           <p>No address registered yet</p>
         <%end%>
       </div>
-      <div>
+      <div class="margin-bottom1">
         <%= form_with model: Address.new, url:user_addresses_path(@user) do |f| %>
 
           <div id="create_address" class="flex-column gap1">
@@ -52,6 +31,27 @@
         <%end%>
 
       </div>
+    </div>
+    <div class="delivery ">
+      <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
+        <div class= "flex-column gap2 ">
+          <div class>
+            <div class="flex gap1">
+              <p>preferred delivery method :</p>
+            <%=f.select :delivery_method, ["pickup", "shipment"], {}, data: {action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"} %>
+            </div>
+          </div>
+          <div id="address-select" data-preferences-target="address" class= "flex gap1">
+          <p>Choose default address :</p>
+            <%= f.select :address_id, @user.addresses.map {|address| [address.title, address.id]}, {prompt: "select default address"}  %>
+          </div>
+          <div>
+
+          <%= f.submit "save"%>
+          <p class="italic margin-top1 margin-bottom1"> you can customize you delivery preferences for each of your boxes</p>
+          </div>
+        </div>
+      <%end%>
     </div>
 
   </div>
