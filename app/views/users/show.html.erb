@@ -36,10 +36,19 @@
                           <div class="box">
                             <div class="height100">
 
-                              <div class="vinyard-name align-center border-bottom">
+                              <div class="vinyard-name align-center flex-column">
                                 <%=link_to vinyard_path(vinyard) do%>
                                   <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
                                 <%end%>
+                                <div class="flex width100 gap05">
+                                  <div class="border-bottom width100 height50"></div>
+                                  <div class="flex">
+                                    <%box.dividende.value.times do%>
+                                      <div class="star"></div>
+                                    <%end%>
+                                  </div>
+                                  <div class="border-bottom width100 height50"></div>
+                              </div>
                               </div>
                               <div class="vinyard-info flex space-between">
                                 <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
@@ -70,11 +79,19 @@
                     <div class="">
                         <div class="box">
                           <div class="height100">
-
-                            <div class="vinyard-name align-center border-bottom">
+                           <div class="vinyard-name align-center flex-column">
                               <%=link_to vinyard_path(vinyard) do%>
                                 <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
                               <%end%>
+                              <div class="flex width100 gap05">
+                                <div class="border-bottom width100 height50"></div>
+                                <div class="flex">
+                                  <%box.dividende.value.times do%>
+                                    <div class="star"></div>
+                                  <%end%>
+                                </div>
+                                <div class="border-bottom width100 height50"></div>
+                              </div>
                             </div>
                             <div class="vinyard-info flex space-between">
                               <% cuvee_colors = box.dividende.dividende_cuvee_colors %>

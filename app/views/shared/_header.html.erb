@@ -8,7 +8,13 @@
       <%if user_signed_in? %>
         <div class="login flex-end">
           <% currentuserpseudo = current_user.pseudo %>
-          <%=link_to "hi #{currentuserpseudo}", user_path(current_user), class:"text-decoration log"%>
+          <div class="flex-column">
+            <%=link_to "hi #{currentuserpseudo}", user_path(current_user), class:"text-decoration log "%>
+            <div class="flex gap05 log">
+              <div class="star center margin-bottom03"></div>
+              <p class="margin0">: <%=stars_amount(current_user)%></p>
+            </div>
+          </div>
           <%= link_to "Disconnect", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class:"text-decoration log" %>
         </div>
       <%else%>

@@ -1,7 +1,14 @@
   <div class="border-top margin-top2 display flex gap4">
 
       <div class="width50 margin-top2">
-        <h2>Box <%=@dividende.year%></h2>
+        <div class="flex gap1 margin-bottom2">
+          <h3 class="margin0">Box <%=@dividende.year%></h3>
+          <div class="flex">
+            <%@dividende.value.times do%>
+              <div class="star"></div>
+            <%end%>
+          </div>
+        </div>
         <div class="flex gap1">
           <div class="border">
             <%@bottles.each_with_index do |bottle,index|%>
@@ -22,7 +29,7 @@
         </div>
       </div>
       <div class="users margin-top2">
-        <h4>Who has this box ?</h4>
+        <h3 class="margin-top-none">Who has this box ?</h3>
         <div class="flex gap05">
           <%if @users.length > 0%>
             <%@users.each_with_index do |user, index|%>

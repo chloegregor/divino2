@@ -294,3 +294,30 @@ margin: 0 auto;
 .width100{
   width: 100%;
 }
+
+.star{
+  background-image: url("star.svg");
+  color: #8c0009;
+  width:10px;
+  height:10px;
+  background-size: cover;
+  align-self:center;
+
+}
+
+.gap05{
+  gap: 0.5em;
+}
+
+.height50{
+  height: 50%;
+}
+
+.flex-start{
+  align-self: flex-start;
+}
+
+.margin-bottom03{
+  margin:0;
+  margin-bottom: 0.3em;
+}

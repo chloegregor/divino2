@@ -36,6 +36,7 @@
   color: #a30000;
   margin: 0;
   justify-content: end;
+  height: fit-content
 }
 
 .login{

@@ -7,6 +7,10 @@ class Dividende < ApplicationRecord
   has_many :cuvees, through: :cuvee_colors
   has_many :vinyard_appellations, through: :cuvees
 
+  validates :year, presence: true
+  validates :shipping_date, presence: true
+  validates :value , presence: true , inclusion: { in: (0..3) }
+
   after_create :create_boxes
 
   scope :current_year, -> { where(year: Time.current.year) }
