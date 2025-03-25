@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :addresses, dependent: :destroy
   after_create :create_delivery
 
-
+  validates :pseudo, presence: true, uniqueness: true
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 

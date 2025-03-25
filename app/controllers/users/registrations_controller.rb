@@ -11,7 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in(@user)
       redirect_to root_path
     else
+      @user.errors.full_messages.each do |message|
+        flash[:error] = message
+      end
       render :new
+
     end
   end
 

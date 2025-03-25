@@ -102,6 +102,10 @@
   gap: 2em;
 }
 
+.gap3{
+  gap: 3em;
+}
+
 .gap4{
   gap: 4em;
 }
@@ -158,6 +162,10 @@ p{
   margin-bottom: 2em;
 }
 
+.padding-bottom1{
+  padding-bottom: 1em;
+}
+
 .padding-left1{
   padding-left: 1em;
 }
@@ -190,7 +198,7 @@ p{
   margin: 10px 0;
   border-radius: 5px;
   z-index: 10000;
-  width:10%;
+  width:20%;
   position: fixed;
   top: 50%;
   right: 50%;
@@ -199,7 +207,7 @@ p{
 
 .elementToFadeInAndOut {
 
-  animation: fadeinout 2s ease-in-out 1;
+  animation: fadeinout 4s ease-in-out 1;
   opacity: 1;
   animation-iteration-count: 1;
 }
@@ -274,4 +282,15 @@ margin: 0 auto;
 
 .hover:hover{
   color: #afafaf;
+}
+
+.field{
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border-radius: 5px;
+}
+
+.width100{
+  width: 100%;
 }
