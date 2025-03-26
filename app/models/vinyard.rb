@@ -8,6 +8,9 @@ class Vinyard < ApplicationRecord
   has_many :boxes, through: :dividendes
   has_many :stock_owners
   has_many :users, through: :stock_owners
+  belongs_to :admin, class_name: "User", foreign_key: "admin_id", optional: true
+
+  after_save :define_admin
 
   accepts_nested_attributes_for :dividendes, allow_destroy: true
 
@@ -18,10 +21,15 @@ class Vinyard < ApplicationRecord
 
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "id","address", "id_value", "name", "updated_at"]
+    ["created_at", "description", "id","address", "id_value", "name", "admin_id", "updated_at"]
   end
   def self.ransackable_associations(auth_object = nil)
     ["appellations", "cuvees", "vinyard_appellations", "cuvee_colors", "colors", "dividendes", "boxes", "stock_owners", "users"]
+  end
+
+  def define_admin
+    admin = User.find_by_id(self.admin_id)
+    admin.admin!
   end
 
 end

@@ -17,11 +17,17 @@
   </div>
   <div class="border-top display">
     <div class="flex margin-top2 gap1">
-      <div class="photo">
+      <div class="photo width40">
         <%= image_tag( "vignoble.jpg") %>
       </div>
-      <div class="description">
-        <p class="margin-top-none margin-bottom-none"><%=@vinyard.description%></p>
+      <div class="description flex-column space-between width60">
+        <p class="margin-top-none margin-bottom-none" id="vinyard-description-container"><%=simple_format(@vinyard.description)%></p>
+        <%if current_user = @vinyard.admin %>
+          <div class="align-flex-end">
+            <%= link_to "edit", edit_vinyard_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
+          </div>
+        <%end%>
+
       </div>
     </div>
     <%= render "dividendes/show_dividende"%>

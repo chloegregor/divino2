@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   #
 
   resources :vinyards
+  
   resources :dividendes
 
   resources :users, only: [:show] do

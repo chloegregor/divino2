@@ -1,13 +1,16 @@
   <div class="border-top margin-top2 display flex gap4">
 
       <div class="width50 margin-top2">
-        <div class="flex gap1 margin-bottom2">
-          <h3 class="margin0">Box <%=@dividende.year%></h3>
-          <div class="flex">
-            <%@dividende.value.times do%>
-              <div class="star"></div>
-            <%end%>
+        <div class="flex space-between">
+          <div class="flex gap1 margin-bottom2">
+            <h3 class="margin0">Box <%=@dividende.year%></h3>
+            <div class="flex">
+              <%@dividende.value.times do%>
+                <div class="star"></div>
+              <%end%>
+            </div>
           </div>
+          <p class="italic margin0"> shipping or pickup date : <%=@dividende.shipping_date.strftime("%d %B %Y")%></p>
         </div>
         <div class="flex gap1">
           <div class="border">
