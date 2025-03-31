@@ -1,0 +1,21 @@
+<%=turbo_stream.update "show-cuvee-color" do%>
+
+  <div class="disable-outside-clik" data-controller="preferences">
+    <div class="modale-show justify-center">
+        <div class="flex-column width100">
+          <div class="flex flex-end">
+            <button class="close" data-action="click->preferences#close">close</button>
+          </div>
+          <h3><%=@cuvee_color.cuvee.vinyard_appellation.vinyard.name%></h3>
+          <h4 id="appellation"><%=@cuvee_color.cuvee.vinyard_appellation.appellation.name%></h4>
+          <h5 id="color"><%=@cuvee_color.cuvee.name%>, <%=@cuvee_color.color.color%></h5>
+          <span id="description">
+            <p class="margin0"><%=@cuvee_color.description%></p>
+            <div class="flex flex-end">
+              <%=link_to "edit", edit_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, @vinyard_appellation, @cuvee_color), data: {turbo_stream: true}, class:"button"%>
+            </div>
+          </span>
+        </div>
+    </div>
+  </div>
+<%end%>

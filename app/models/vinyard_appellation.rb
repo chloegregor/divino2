@@ -1,7 +1,7 @@
 class VinyardAppellation < ApplicationRecord
   belongs_to :vinyard
   belongs_to :appellation
-  has_many :cuvees
+  has_many :cuvees, dependent: :destroy
   has_many :cuvee_colors, through: :cuvees
 
   accepts_nested_attributes_for :cuvees, allow_destroy: true

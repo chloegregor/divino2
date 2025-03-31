@@ -42,7 +42,7 @@
                         <div class="">
                           <% exchange.initiator_boxes.each do |box|%>
                             <div class="border width20em align-center">
-                              <%=link_to dividende_path(box.dividende) do%>
+                              <%=link_to vinyard_path(box.dividende) do%>
                                 <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                               <%end%>
                             </div>

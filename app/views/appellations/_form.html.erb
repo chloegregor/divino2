@@ -1,0 +1,10 @@
+<%= form_with model: appellation, url: appellations_path, method: :post do |form|%>
+  <div class="flex-column gap1">
+    <%=form.hidden_field :vinyard_id, value:vinyard.id %>
+    <%=form.label "appellation name"%>
+    <%=form.text_field :name%>
+    <div>
+      <%=form.submit%>
+    </div>
+  </div>
+<%end%>

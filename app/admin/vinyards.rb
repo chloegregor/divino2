@@ -26,7 +26,9 @@ ActiveAdmin.register Vinyard do
       row :address
       row :description
       row :admin_id do |vinyard|
-        vinyard.admin.email
+        if vinyard.admin
+          vinyard.admin.email
+        end
       end
     end
     vinyard.vinyard_appellations.each do |va|

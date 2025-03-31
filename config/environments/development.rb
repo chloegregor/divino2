@@ -7,7 +7,7 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.hosts.clear
-  config.hosts << "881a-2a02-8428-1a57-5e01-5de1-d23c-187c-6c2e.ngrok-free.app"
+  config.hosts << "db2b-2a02-8428-1a57-5e01-309f-1347-99b1-d580.ngrok-free.app"
    config.hosts << "localhost:3000"
 
   config.enable_reloading = true

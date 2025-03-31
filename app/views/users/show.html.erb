@@ -54,7 +54,7 @@
                                 <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
                                 <div class="name appellation">
                                     <% cuvee_colors.each do |cc| %>
-                                      <p class="margin-top
+                                      <h4 class="margin-top
                                       ">
                                         <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
                                         </p>
@@ -97,7 +97,7 @@
                               <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
                               <div class="name appellation">
                                   <% cuvee_colors.each do |cc| %>
-                                    <p class="margin-top">
+                                    <h4 class="margin-top">
                                       <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
                                       </p>
                                   <%end%>

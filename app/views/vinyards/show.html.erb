@@ -1,13 +1,25 @@
 <%= render "shared/header"%>
 <div class="container">
   <div class="flex space-between margin-top2 padding-bottom1">
-    <div class="flex-column space-between">
-      <h3 class="center"><%=@vinyard.name%></h2>
-      <%appellations = @vinyard.appellations%>
-      <h4 class=""><%appellations.each_with_index do |appellation,index|%>
-        <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == appellations.size - 1%>
-      <%end%>
+    <div class="flex space-between gap1">
+      <h3 class=""><%=@vinyard.name%></h2>
+      <%appellations = @vinyard.vinyard_appellations%>
+      <h4 class="flex align-flex-end">
+        <%appellations.each_with_index do |appellation,index|%>
+          <%= appellation.appellation.name %><%= "&nbsp;&middot;".html_safe unless index == appellations.size - 1%>
+          <%if current_user && current_user == @vinyard.admin%>
+            <%=button_to "x", vinyard_vinyard_appellation_path(@vinyard, appellation), method: :delete, class:"delete"%>
+          <%end%>
+        <%end%>
       </h4>
+      <%if current_user == @vinyard.admin%>
+        <div class="align-flex-end" id="new-vinyard-appellation">
+        </div>
+
+          <%if current_user && current_user == @vinyard.admin%>
+            <%= link_to "add appellation", new_vinyard_vinyard_appellation_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
+          <%end%>
+      <%end%>
     </div>
       <%if current_user%>
           <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
@@ -15,22 +27,55 @@
           <%end%>
         <%end%>
   </div>
-  <div class="border-top display">
+  <div class="border-top">
     <div class="flex margin-top2 gap1">
       <div class="photo width40">
         <%= image_tag( "vignoble.jpg") %>
       </div>
       <div class="description flex-column space-between width60">
-        <p class="margin-top-none margin-bottom-none" id="vinyard-description-container"><%=simple_format(@vinyard.description)%></p>
-        <%if current_user = @vinyard.admin %>
-          <div class="align-flex-end">
-            <%= link_to "edit", edit_vinyard_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
-          </div>
-        <%end%>
+        <div class="margin-top-none margin-bottom-none flex-column" id="vinyard-description-container">
+          <%=simple_format(@vinyard.description)%>
+          <%if current_user = @vinyard.admin %>
+            <div class="align-flex-end">
+              <%= link_to "edit", edit_vinyard_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
+            </div>
+          <%end%>
+        </div>
 
       </div>
     </div>
-    <%= render "dividendes/show_dividende"%>
+    <div class="border-top margin-top1">
+      <h3 class="margin-top1 margin-bottom1">Production</h3>
+      <div class="flex space-between">
+        <div class="flex-column gap1">
+          <% @cuvee_colors_by_appellation.each do |cc|%>
+            <div class="flex gap1">
+              <%if current_user && current_user == @vinyard.admin%>
+                <div class="flex-column gap1" id="new-cuvee-color">
+                  <%=link_to "add bottle", new_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cc.vinyard_appellation), data:{turbo_stream: true}, class:"button"%>
+                </div>
+                <span id="new-cuvee"></span>
+
+              <%end%>
+              <h4><%=cc.vinyard_appellation.appellation.name%> :</h4>
+                <div class="flex gap1">
+                  <p><%=cc.name%> (
+                  <%cc.cuvee_colors.map do |cuvee_color|%>
+                    <%=link_to "#{cuvee_color.color.color}", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cuvee_color.cuvee.vinyard_appellation.id, cuvee_color), data: {turbo_stream: true}%>
+                    <%if current_user && current_user == @vinyard.admin%>
+                      <%= button_to "x", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cc, cuvee_color ), method: :delete, class:"delete"%>
+                    <%end%>
+                  <%end%>
+                  )</p>
+                  <span id="show-cuvee-color"></span>
+                </div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render "dividendes/show_dividende"%>
 
   </div>
 </div>
