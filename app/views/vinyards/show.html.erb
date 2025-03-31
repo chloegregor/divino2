@@ -48,25 +48,40 @@
       <h3 class="margin-top1 margin-bottom1">Production</h3>
       <div class="flex space-between">
         <div class="flex-column gap1">
-          <% @cuvee_colors_by_appellation.each do |cc|%>
+          <% @vinyard_appellations.each do |va|%>
             <div class="flex gap1">
               <%if current_user && current_user == @vinyard.admin%>
                 <div class="flex-column gap1" id="new-cuvee-color">
-                  <%=link_to "add bottle", new_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cc.vinyard_appellation), data:{turbo_stream: true}, class:"button"%>
+                  <%=link_to "add bottle", new_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va), data:{turbo_stream: true}, class:"button"%>
                 </div>
                 <span id="new-cuvee"></span>
 
               <%end%>
-              <h4><%=cc.vinyard_appellation.appellation.name%> :</h4>
+              <h4><%=va.appellation.name%> :</h4>
                 <div class="flex gap1">
-                  <p><%=cc.name%> (
-                  <%cc.cuvee_colors.map do |cuvee_color|%>
-                    <%=link_to "#{cuvee_color.color.color}", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cuvee_color.cuvee.vinyard_appellation.id, cuvee_color), data: {turbo_stream: true}%>
-                    <%if current_user && current_user == @vinyard.admin%>
-                      <%= button_to "x", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, cc, cuvee_color ), method: :delete, class:"delete"%>
+
+                    <%va.cuvees.each do |cuvee|%>
+                      <div class="flex gap1">
+                        <p>
+                          <%=cuvee.name%>
+                          (
+                          <%cuvee.cuvee_colors.each_with_index do |cc, index|%>
+                            <%=link_to vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc), data:{turbo_stream: true} do%>
+                              <%unless index == (cuvee.cuvee_colors.size) -1 %>
+                                <%="#{cc.color.color},"%>
+                              <%else%>
+                                <%="#{cc.color.color}"%>
+                              <%end%>
+                            <%end%>
+                            <%if current_user && current_user == @vinyard.admin%>
+                              <%= button_to "x", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc ), method: :delete, class:"delete"%>
+                            <%end%>
+                          <%end%>
+                            )
+                        </p>
+                      </div>
                     <%end%>
-                  <%end%>
-                  )</p>
+
                   <span id="show-cuvee-color"></span>
                 </div>
             </div>
