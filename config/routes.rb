@@ -15,8 +15,15 @@ Rails.application.routes.draw do
 
   #
 
-  resources :vinyards
-  resources :dividendes
+  resources :appellations
+
+  resources :vinyards do
+    resources :dividendes
+    resources :vinyard_appellations do
+      resources :cuvees 
+      resources :cuvee_colors
+    end
+  end
 
   resources :users, only: [:show] do
     resources :exchanges, only: [:index, :create]

@@ -1,6 +1,6 @@
 ActiveAdmin.register Vinyard do
 
-  permit_params :name, :description,
+  permit_params :name, :description, :address, :admin_id,
               vinyard_appellations_attributes: [:id, :name, :appellation_id, :_destroy,
                 cuvees_attributes: [:id, :name, :_destroy,
                 cuvee_colors_attributes: [:id, :description, :color_id, :_destroy]
@@ -25,6 +25,11 @@ ActiveAdmin.register Vinyard do
       row :name
       row :address
       row :description
+      row :admin_id do |vinyard|
+        if vinyard.admin
+          vinyard.admin.email
+        end
+      end
     end
     vinyard.vinyard_appellations.each do |va|
       panel "Appellation #{va.appellation.name}" do
@@ -70,6 +75,7 @@ ActiveAdmin.register Vinyard do
       f.input :name, label:  'Name'
       f.input :address, label: 'Address'
       f.input :description
+      f.input :admin_id, as: :select, collection: User.all.pluck(:email, :id), label: 'Choose Admin'
     end
     f.has_many :vinyard_appellations, heading: 'Appellations', allow_destroy: true do |va|
       va.input :appellation_id, as: :select, collection: Appellation.all.pluck(:name, :id), label: 'Choose Appellation'

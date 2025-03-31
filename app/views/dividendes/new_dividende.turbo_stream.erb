@@ -1,0 +1,19 @@
+<%= turbo_stream.update "new-dividende" do %>
+  <%= form_with model: Dividende.new, url: new_vinyard_dividende_path(@vinyard) do |f|%>
+    <div class="fields">
+      <div class="field">
+        <%= f.label :year %>
+        <%= f.text_field :year %>
+      </div>
+
+    <div class="field">
+      <%= f.label :appellation_id, "Choose Appellation" %>
+      <%= f.select :appellation_id,
+        options_for_select(Appellation.all.pluck(:name, :id) + [["➕ Ajouter une appellation", "new"]]),
+        {},
+        { data: { action: "change->appellation#check" } } %>
+    </div>
+    <%=f.submit "Create"%>
+
+  <%end%>
+<%end%>

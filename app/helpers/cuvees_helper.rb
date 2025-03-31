@@ -1,0 +1,2 @@
+module CuveesHelper
+end

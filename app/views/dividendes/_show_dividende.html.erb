@@ -1,48 +1,55 @@
-  <div class="border-top margin-top2 display flex gap4">
-
-      <div class="width50 margin-top2">
-        <div class="flex gap1 margin-bottom2">
-          <h3 class="margin0">Box <%=@dividende.year%></h3>
-          <div class="flex">
-            <%@dividende.value.times do%>
-              <div class="star"></div>
-            <%end%>
-          </div>
-        </div>
-        <div class="flex gap1">
-          <div class="border">
-            <%@bottles.each_with_index do |bottle,index|%>
-              <div class="bottle padding">
-                <div class="flex gap1">
-                  <p><%=bottle.bottle_quantity%>x <%=bottle.cuvee_color.cuvee.name%> <%=bottle.cuvee_color.cuvee.vinyard_appellation.appellation.name%></p>
-                  <p>- <%=bottle.cuvee_color.color.color%></p>
-                </div>
-                <p><%=bottle.cuvee_color.description%></p>
+  <div class="flex-column">
+    <div class="border-top margin-top2  flex gap4">
+        <div class="width50 margin-top2">
+          <div class="flex space-between">
+            <div class="flex gap1 margin-bottom2">
+              <h3 class="margin0">Box <%=@dividende.year%></h3>
+              <div class="flex">
+                <%@dividende.value.times do%>
+                  <div class="star"></div>
+                <%end%>
               </div>
-              <%if index != @bottles.size-1%>
-            <div class="border-top"></div>
-            <% end %>
-
+            </div>
+            <p class="italic margin0"> shipping or pickup date : <%=@dividende.shipping_date.strftime("%d %B %Y")%></p>
+          </div>
+          <div class="flex-column gap1">
+            <div class="border">
+              <%@bottles.each_with_index do |bottle,index|%>
+                <div class="bottle padding">
+                  <div class="flex gap1">
+                    <p><%=bottle.bottle_quantity%>x <%=bottle.cuvee_color.cuvee.name%> <%=bottle.cuvee_color.cuvee.vinyard_appellation.appellation.name%></p>
+                    <p>- <%=bottle.cuvee_color.color.color%></p>
+                  </div>
+                  <p><%=simple_format(bottle.cuvee_color.description)%></p>
+                </div>
+                <%if index != @bottles.size-1%>
+                  <div class="border-top"></div>
+                <% end %>
+              <%end%>
+            </div>
+            <% if current_user = @vinyard.admin%>
+              <div class="" id="new-dividende">
+                <%=link_to "create new dividende", new_vinyard_dividende_path(@vinyard), data: {turbo_stream: true}, class:"button"%>
+              </div>
             <%end%>
-
           </div>
         </div>
-      </div>
-      <div class="users margin-top2">
-        <h3 class="margin-top-none">Who has this box ?</h3>
-        <div class="flex gap05">
-          <%if @users.length > 0%>
-            <%@users.each_with_index do |user, index|%>
-              <%=link_to user_path(user), class:"black" do %>
-                <div class="user">
-                  <p><%=user.pseudo%><%="," unless index == @users.size-1%></p>
-                </div>
-              <%end%>
-            <% end %>
-          <%else%>
-            <p class="italic">Nobody wants to echange this box yet.</p>
-          <%end%>
+        <div class="users margin-top2">
+          <h3 class="margin-top-none">Who has this box ?</h3>
+          <div class="flex gap05">
+            <%if @users.length > 0%>
+              <%@users.each_with_index do |user, index|%>
+                <%=link_to user_path(user), class:"black" do %>
+                  <div class="user">
+                    <p><%=user.pseudo%><%="," unless index == @users.size-1%></p>
+                  </div>
+                <%end%>
+              <% end %>
+            <%else%>
+              <p class="italic">Nobody wants to echange this box yet.</p>
+            <%end%>
 
+        </div>
       </div>
-    </div>
+  </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="container">
   <div class="menu">
     <div class="flex space-between padding-bottom1">
-      <h3 class="margin0">explore vineyards</h3>
+      <h3 class="margin0">Vineyards</h3>
       <%if current_user%>
         <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
           <h2 class="hover">my cellar</h2>
@@ -23,7 +23,7 @@
               <div class="vinyard-info flex space-between">
                 <% va = vinyard.appellations%>
                   <div class="name appellation text-align-center">
-                    <p class="margin-top-none margin-bottom-none">
+                    <h4 class="margin-top-none margin-bottom-none">
                       <% va.each_with_index do |appellation, index| %>
                           <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == va.size - 1%>
                       <%end%>

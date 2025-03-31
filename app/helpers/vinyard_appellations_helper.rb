@@ -1,0 +1,2 @@
+module VinyardAppellationsHelper
+end

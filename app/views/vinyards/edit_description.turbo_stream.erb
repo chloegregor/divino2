@@ -1,0 +1,8 @@
+<%=turbo_stream.replace "vinyard-description-container" do%>
+  <%=form_with model: @vinyard do |form| %>
+    <div class="width100">
+      <%=form.text_area :description, size: "500x20"%>
+      <%=form.submit%>
+    </div>
+  <% end %>
+<%end%>

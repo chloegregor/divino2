@@ -11,4 +11,9 @@ class DividendesController < ApplicationController
     @users = Box.where(dividende_id: @dividende.id, exchangeable: true).includes(:user).map(&:user).uniq
   end
 
+  def new
+    @vinyard = Vinyard.find(params[:vinyard_id])
+    render 'dividendes/new_dividende'
+  end
+
 end
