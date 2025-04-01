@@ -19,8 +19,9 @@ Rails.application.routes.draw do
 
   resources :vinyards do
     resources :dividendes
+    resources :dividende_cuvee_colors
     resources :vinyard_appellations do
-      resources :cuvees 
+      resources :cuvees
       resources :cuvee_colors
     end
   end

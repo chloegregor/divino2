@@ -12,7 +12,9 @@
           <span id="description">
             <p class="margin0"><%=@cuvee_color.description%></p>
             <div class="flex flex-end">
-              <%=link_to "edit", edit_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, @vinyard_appellation, @cuvee_color), data: {turbo_stream: true}, class:"button"%>
+              <% if current_user && current_user == @vinyard.admin%>
+                <%=link_to "edit", edit_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, @vinyard_appellation, @cuvee_color), data: {turbo_stream: true}, class:"button"%>
+              <%end%>
             </div>
           </span>
         </div>

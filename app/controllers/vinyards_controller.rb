@@ -14,6 +14,7 @@ class VinyardsController < ApplicationController
 
   end
 
+
   def edit
     @vinyard = Vinyard.find(params[:id])
     render 'vinyards/edit_description'
