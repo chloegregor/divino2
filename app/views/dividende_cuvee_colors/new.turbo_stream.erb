@@ -1,0 +1,15 @@
+<%= turbo_stream.append "new-bottle" do%>
+  <div data-controller="dividende-cuvee-color">
+      <%=fields_for "dividende[dividende_cuvee_colors_attributes][#{Time.current.to_i}]", @dividende_cuvee_color do |f|%>
+        <div class="field">
+          <%=f.label :cuvee_color%>
+          <%=f.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
+        </div>
+        <div class="field">
+          <%=f.label :bottle_quantity%>
+          <%= f.number_field :bottle_quantity%>
+        </div>
+      <%end%>
+    <button type=button class="delete" data-action="click->dividende-cuvee-color#remove">x</button>
+  </div>
+<%end%>

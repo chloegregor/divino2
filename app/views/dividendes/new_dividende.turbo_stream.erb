@@ -1,19 +1,40 @@
 <%= turbo_stream.update "new-dividende" do %>
-  <%= form_with model: Dividende.new, url: new_vinyard_dividende_path(@vinyard) do |f|%>
-    <div class="fields">
-      <div class="field">
-        <%= f.label :year %>
-        <%= f.text_field :year %>
-      </div>
+  <div class="disable-outside-clik" data-controller="dividende">
+    <div class="modale-show jutify-center">
+    <%= form_with model: @dividende, url: vinyard_dividendes_path(@vinyard), method: :post do |f|%>
+      <div class="fields">
+        <div class="field">
+          <%= f.label :year %>
+          <%= f.text_field :year %>
+        </div>
+        <div class="field">
+          <%= f.label :shipping_date%>
+          <%= f.date_field :shipping_date %>
+          <div class="field">
+            <%=f.label :value%>
+            <%=f.select :value, [1,2,3]%>
+          </div>
 
-    <div class="field">
-      <%= f.label :appellation_id, "Choose Appellation" %>
-      <%= f.select :appellation_id,
-        options_for_select(Appellation.all.pluck(:name, :id) + [["➕ Ajouter une appellation", "new"]]),
-        {},
-        { data: { action: "change->appellation#check" } } %>
+        </div>
+          <div id="dividende-cuvee-colors">
+            <%=f.fields_for :dividende_cuvee_colors do |dcc|%>
+              <div class="field">
+                <%=dcc.label :cuvee_color%>
+                <%=dcc.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
+              </div>
+              <div class="field">
+                <%=dcc.label :bottle_quantity%>
+                <%= dcc.number_field :bottle_quantity%>
+              </div>
+            <%end%>
+          </div>
+          <div id="new-bottle"></div>
+          <%=button_tag "add bottles", formaction:new_vinyard_dividende_cuvee_color_path(@vinyard), formmethod: :get, data:{turbo_stream: true}%>
+          </div>
+          <button type="button" data-action="click->dividende#close">close</button>
+          <%=f.submit "Create"%>
+        </div>
+    <%end%>
     </div>
-    <%=f.submit "Create"%>
-
-  <%end%>
+  </div>
 <%end%>
