@@ -21,5 +21,6 @@ test:
   database: storage/test.sqlite3
 
 production:
-  <<: *default
-  database: <% <ENV['SCALINGO_POSTGRESQL_URL']%>
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['SCALINGO_POSTGRESQL_URL'] %>
