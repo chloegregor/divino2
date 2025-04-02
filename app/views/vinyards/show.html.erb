@@ -35,7 +35,7 @@
       <div class="description flex-column space-between width60">
         <div class="margin-top-none margin-bottom-none flex-column" id="vinyard-description-container">
           <%=simple_format(@vinyard.description)%>
-          <%if current_user = @vinyard.admin %>
+          <%if current_user && current_user == @vinyard.admin %>
             <div class="align-flex-end">
               <%= link_to "edit", edit_vinyard_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
             </div>

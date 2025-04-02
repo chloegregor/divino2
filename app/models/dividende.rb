@@ -27,8 +27,18 @@ class Dividende < ApplicationRecord
 
   def create_boxes
     self.vinyard.stock_owners.each do |stock_owner|
+      puts "stock_owner.quantity: #{stock_owner.quantity}"
       stock_owner.quantity.times do
-        Box.create(user: stock_owner.user, vinyard: self.vinyard, dividende: self)
+        puts "stock_owner.user: #{stock_owner.user}"
+
+        box = Box.create(user: stock_owner.user, stock_owner: stock_owner, vinyard: self.vinyard, dividende: self)
+        
+
+        if box.persisted?
+          puts "Box created: #{box.inspect}"
+        else
+          puts " Box not created: #{box.errors.full_messages}"
+        end
       end
     end
   end

@@ -16,7 +16,7 @@
         <% @vinyards.each do |vinyard|%>
         <div class="vinyard">
           <%= link_to vinyard_path(vinyard), class: "text-decoration black" do %>
-            <div class="height100 ">
+            <div class="height100 flex-column gap05">
               <div class="vinyard-name align-center border-bottom">
                 <h3 class="name"><%= vinyard.name %></h3>
               </div>
