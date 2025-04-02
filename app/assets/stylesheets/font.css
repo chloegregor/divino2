@@ -8,6 +8,14 @@ h4{
   font-family: "Inter", sans-serif;
   font-size: 1.2em;
   margin: 0;
+  font-weight: 100;
+}
+
+h5{
+  font-family: "Inter", sans-serif;
+  font-size: 0.9em;
+  margin: 0;
+  font-weight: 100;
 }
 
 h3{

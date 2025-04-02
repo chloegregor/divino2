@@ -41,9 +41,9 @@
                         </div>
                         <div class="">
                           <% exchange.initiator_boxes.each do |box|%>
-                            <div class="border width20em align-center">
+                            <div class="border width20em align-center padding">
                               <%=link_to vinyard_path(box.dividende) do%>
-                                <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                                <p class="margin0"><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                               <%end%>
                             </div>
                           <%end%>
@@ -65,8 +65,8 @@
                     <div class="flex gap2">
                       <div class="">
                         <% exchange.initiator_boxes.each do |box|%>
-                          <div class="border width20em align-center">
-                            <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                          <div class="border width20em align-center padding">
+                            <p class="margin0"><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                           </div>
                         <%end%>
                       </div>
@@ -74,9 +74,9 @@
                       <div class="relative">
                         <div class="absolute-20"><p class="margin0"><%=exchange.recipient.pseudo%>'s</p></div>
                         <% exchange.recipient_boxes.each do |box|%>
-                          <div class=" width20em border align-center">
+                          <div class=" width20em border align-center padding">
                             <%=link_to vinyard_path(box.vinyard) do%>
-                              <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                              <p class="margin0"> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                             <%end%>
                           </div>
                         <%end%>
@@ -111,8 +111,8 @@
 
 
                     <% my_previous_boxes.each do |box| %>
-                      <div class="border width20em align-center">
-                        <p><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                      <div class="border width20em align-center padding">
+                        <p class="margin0"><%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                       </div>
                     <%end%>
                   </div>
@@ -121,9 +121,9 @@
                       <div class="absolute-20"><p class="margin0">previously <%=their_pseudo%>'s<p></div>
                     <%end%>
                     <%their_previous_boxes.each do |box|%>
-                      <div class="border width20em align-center">
+                      <div class="border width20em align-center padding">
                         <%=link_to vinyard_path(box.vinyard) do%>
-                          <p> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
+                          <p class="margin0"> <%= box.dividende.vinyard.name%> <%= box.dividende.year%></p>
                         <%end%>
                       </div>
                     <%end%>
@@ -144,8 +144,8 @@
                       <div class="flex gap2">
                         <div>
                           <% exchange.initiator_box_exchanges.each do |box|%>
-                            <div class="border width20em align-center">
-                              <p><%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
+                            <div class="border width20em align-center padding">
+                              <p class="margin0"><%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
                             </div>
                           <%end%>
                         </div>
@@ -154,9 +154,9 @@
                             <p class="margin0"> <%=exchange.recipient.pseudo%>'s</p>
                           </div>
                           <% exchange.recipient_box_exchanges.each do |box|%>
-                            <div class="border width20em align-center">
+                            <div class="border width20em align-center padding">
                               <%=link_to vinyard_path(box.box.vinyard) do%>
-                                <p> <%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
+                                <p class="margin0"> <%= box.box.dividende.vinyard.name%> <%= box.box.dividende.year%></p>
                               <%end%>
                             </div>
                           <%end%>

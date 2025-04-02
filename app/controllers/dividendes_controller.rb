@@ -51,6 +51,14 @@ class DividendesController < ApplicationController
     end
   end
 
+  def destroy
+    @dividende = Dividende.find(params[:id])
+    @vinyard = @dividende.vinyard
+    @dividende.destroy
+    redirect_to vinyard_path(@vinyard)
+  end
+
+
 private
 
   def dividende_params

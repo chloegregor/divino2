@@ -16,7 +16,7 @@
             <h3 class="margin0 hover">My cellar</h3>
             <%end%>
           <%= link_to user_exchanges_path(@user), class:"fit-content align-flex-end" do%>
-            <h2 class="hover">My exchanges</h2>
+            <h3 class="hover">My exchanges</h2>
           <%end%>
           </div>
         <%end%>
@@ -34,11 +34,11 @@
                       <div class="">
 
                           <div class="box">
-                            <div class="height100">
+                            <div class="height100 flex-column gap05">
 
-                              <div class="vinyard-name align-center flex-column">
+                              <div class=" align-center flex-column">
                                 <%=link_to vinyard_path(vinyard) do%>
-                                  <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
+                                  <h4 class="margin-top-bottom05"><%= vinyard.name %> <%=box.dividende.year%></h3>
                                 <%end%>
                                 <div class="flex width100 gap05">
                                   <div class="border-bottom width100 height50"></div>
@@ -50,14 +50,13 @@
                                   <div class="border-bottom width100 height50"></div>
                               </div>
                               </div>
-                              <div class="vinyard-info flex space-between">
+                              <div class=" flex ">
                                 <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
-                                <div class="name appellation">
+                                <div class="flex-column gap1">
                                     <% cuvee_colors.each do |cc| %>
-                                      <h4 class="margin-top
-                                      ">
+                                      <h5 class="">
                                         <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
-                                        </p>
+                                      </h5>
                                     <%end%>
                                 </div>
                               </div>
@@ -78,10 +77,10 @@
                   <%boxes.each do |box|%>
                     <div class="">
                         <div class="box">
-                          <div class="height100">
-                           <div class="vinyard-name align-center flex-column">
+                          <div class="height100 flex-column gap05">
+                           <div class="align-center flex-column">
                               <%=link_to vinyard_path(vinyard) do%>
-                                <h3 class="name"><%= vinyard.name %> <%=box.dividende.year%></h3>
+                                <h4 class="margin-top-bottom05"><%= vinyard.name %> <%=box.dividende.year%></h4>
                               <%end%>
                               <div class="flex width100 gap05">
                                 <div class="border-bottom width100 height50"></div>
@@ -93,13 +92,13 @@
                                 <div class="border-bottom width100 height50"></div>
                               </div>
                             </div>
-                            <div class="vinyard-info flex space-between">
+                            <div class=" flex ">
                               <% cuvee_colors = box.dividende.dividende_cuvee_colors %>
-                              <div class="name appellation">
+                              <div class="flex-column gap1">
                                   <% cuvee_colors.each do |cc| %>
-                                    <h4 class="margin-top">
+                                    <h5 class="margin1">
                                       <%=cc.bottle_quantity%> x <%=cc.cuvee_color.cuvee.name%> <%= "&nbsp;&middot; #{cc.cuvee_color.cuvee.vinyard_appellation.appellation.name}".html_safe %>
-                                      </p>
+                                    </h5>
                                   <%end%>
                               </div>
                             </div>
