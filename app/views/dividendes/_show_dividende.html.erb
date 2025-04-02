@@ -27,11 +27,12 @@
                 <% end %>
               <%end%>
             </div>
-            <% if current_user && current_user = @vinyard.admin%>
-              <span>
+            <% if current_user && current_user == @vinyard.admin%>
+              <span class="flex space-between">
+                <%= link_to "edit dividende", edit_vinyard_dividende_path(@vinyard, @dividende), data: {turbo_stream: true}, class:"button"%>
                 <%=link_to "create new dividende", new_vinyard_dividende_path(@vinyard), data: {turbo_stream: true}, class:"button"%>
               </span>
-              <div class="" id="new-dividende">
+              <div class="" id="dividende">
               </div>
             <%end%>
           </div>
@@ -52,6 +53,7 @@
             <%end%>
 
         </div>
+
       </div>
   </div>
 </div>

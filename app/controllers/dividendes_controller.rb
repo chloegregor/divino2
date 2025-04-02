@@ -32,9 +32,28 @@ class DividendesController < ApplicationController
     end
   end
 
+  def edit
+    @dividende = Dividende.find(params[:id])
+    @vinyard = @dividende.vinyard
+    @cuvee_colors = @vinyard.cuvee_colors
+    render 'dividendes/edit'
+  end
+
+  def update
+    @dividende = Dividende.find(params[:id])
+    @vinyard = @dividende.vinyard
+    @cuvee_colors = @vinyard.cuvee_colors
+    @dividende.update(dividende_params)
+    if @dividende.save
+      redirect_to vinyard_path(@vinyard)
+    else
+      render 'dividendes/edit'
+    end
+  end
+
 private
 
   def dividende_params
-    params.require(:dividende).permit(:vinyard_id, :year, :shipping_date, :value, dividende_cuvee_colors_attributes: [:cuvee_color_id, :bottle_quantity])
+    params.require(:dividende).permit(:vinyard_id, :year, :shipping_date, :value, dividende_cuvee_colors_attributes: [:cuvee_color_id, :bottle_quantity, :id, :_destroy])
   end
 end
