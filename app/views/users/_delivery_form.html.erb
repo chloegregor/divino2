@@ -53,6 +53,13 @@
         </div>
       <%end%>
     </div>
+    <div class="border-top">
+      <p class="margin-top1">My shares :</p>
+      <%@user.stock_owners.each do |s|%>
+        <%= "#{s.vinyard.name} (#{s.quantity})"%>
+        <%end%>
 
+    </div>
   </div>
+
 </div>

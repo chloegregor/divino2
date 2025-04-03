@@ -1,40 +1,44 @@
 <%= turbo_stream.update "dividende" do %>
   <div class="disable-outside-clik" data-controller="dividende">
     <div class="modale-show jutify-center">
-    <%= form_with model: @dividende, url: vinyard_dividendes_path(@vinyard), method: :post do |f|%>
-      <div class="fields">
-        <div class="field">
-          <%= f.label :year %>
-          <%= f.text_field :year %>
-        </div>
-        <div class="field">
-          <%= f.label :shipping_date%>
-          <%= f.date_field :shipping_date %>
+      <%= form_with model: @dividende, url: vinyard_dividendes_path(@vinyard), method: :post do |f|%>
+        <div class="fields flex-column">
+          <div class="field">
+            <%= f.label :year %>
+            <%= f.text_field :year %>
+          </div>
+          <div class="field">
+            <%= f.label :shipping_date%>
+            <%= f.date_field :shipping_date %>
+          </div>
           <div class="field">
             <%=f.label :value%>
             <%=f.select :value, [1,2,3]%>
           </div>
 
-        </div>
-          <div id="dividende-cuvee-colors">
-            <%=f.fields_for :dividende_cuvee_colors do |dcc|%>
-              <div class="field">
-                <%=dcc.label :cuvee_color%>
-                <%=dcc.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
-              </div>
-              <div class="field">
-                <%=dcc.label :bottle_quantity%>
-                <%= dcc.number_field :bottle_quantity%>
-              </div>
-            <%end%>
           </div>
-          <div id="new-bottle"></div>
-          <%=button_tag "add bottles", formaction:new_vinyard_dividende_cuvee_color_path(@vinyard), formmethod: :get, data:{turbo_stream: true}%>
-          </div>
-          <button type="button" data-action="click->dividende#close">close</button>
-          <%=f.submit "Create"%>
-        </div>
-    <%end%>
+            <div id="dividende-cuvee-colors">
+              <%=f.fields_for :dividende_cuvee_colors do |dcc|%>
+                <div class="field">
+                  <%=dcc.label :cuvee_color%>
+                  <%=dcc.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
+                </div>
+                <div class="field">
+                  <%=dcc.label :bottle_quantity%>
+                  <%= dcc.number_field :bottle_quantity%>
+                </div>
+              <%end%>
+            </div>
+            <div id="new-bottle"></div>
+            <span class="flex flex-end">
+              <%=button_tag "add bottles", formaction:new_vinyard_dividende_cuvee_color_path(@vinyard), formmethod: :get, data:{turbo_stream: true}%>
+            </span>
+            <p>Creating this dividende will create the boxes for each stock owners.</p>
+            <%=f.submit "Create"%>
+      <%end%>
+      <span class="flex flex-end">
+        <button type="button" data-action="click->dividende#close">close</button>
+      </span>
+      </div>
     </div>
-  </div>
 <%end%>

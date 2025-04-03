@@ -196,7 +196,7 @@ p{
 }
 
 .width40{
-  width: 40%;
+  width: 30%;
 }
 
 /* application.css */
@@ -275,6 +275,9 @@ p{
   padding-bottom: 1em;
 }
 
+.padding-top2{
+  padding-top: 2em;
+}
 .disable-outside-clik{
   position: fixed;
   top: 0;
@@ -366,4 +369,8 @@ margin-left: 0.2em;
   display: grid;
   grid-template-columns: 1.5fr 2fr 4fr;
   gap: 1em;
+}
+
+.space-around{
+  justify-content: space-around;
 }

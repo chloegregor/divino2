@@ -71,7 +71,7 @@ ActiveAdmin.register Vinyard do
   end
 
   form do |f|
-    f.inputs 'Vinyard' do
+    f.inputs 'Vineyard' do
       f.input :name, label:  'Name'
       f.input :address, label: 'Address'
       f.input :description

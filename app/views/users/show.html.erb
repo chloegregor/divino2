@@ -15,9 +15,12 @@
             <%= link_to user_path(@user), class:"height-fit-content" do  %>
             <h3 class="margin0 hover">My cellar</h3>
             <%end%>
-          <%= link_to user_exchanges_path(@user), class:"fit-content align-flex-end" do%>
-            <h3 class="hover">My exchanges</h2>
-          <%end%>
+            <div class="width40 flex space-between">
+              <%= link_to user_exchanges_path(@user), class:"fit-content align-flex-end" do%>
+              <h3 class="hover">My exchanges</h2>
+            <%end%>
+              <h3 class="hover">My documents</h3>
+            </div>
           </div>
         <%end%>
       <%else%>

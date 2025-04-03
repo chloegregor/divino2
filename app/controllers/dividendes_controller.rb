@@ -5,10 +5,7 @@ class DividendesController < ApplicationController
   end
 
   def show
-    @dividende = Dividende.find(params[:id])
-    @bottles = @dividende.dividende_cuvee_colors
-    @appellations = @dividende.vinyard_appellations
-    @users = Box.where(dividende_id: @dividende.id, exchangeable: true).includes(:user).map(&:user).uniq
+
   end
 
   def new
@@ -57,6 +54,8 @@ class DividendesController < ApplicationController
     @dividende.destroy
     redirect_to vinyard_path(@vinyard)
   end
+
+  
 
 
 private

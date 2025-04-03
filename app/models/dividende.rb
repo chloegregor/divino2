@@ -32,7 +32,7 @@ class Dividende < ApplicationRecord
         puts "stock_owner.user: #{stock_owner.user}"
 
         box = Box.create(user: stock_owner.user, stock_owner: stock_owner, vinyard: self.vinyard, dividende: self)
-        
+
 
         if box.persisted?
           puts "Box created: #{box.inspect}"
@@ -42,4 +42,6 @@ class Dividende < ApplicationRecord
       end
     end
   end
+
+  
 end
