@@ -1,6 +1,4 @@
-  <div class="flex-column">
-    <div class="border-top margin-top2  flex gap4">
-      <div class="width50 margin-top2">
+  <div class="flex-column width50">
         <div class="flex space-between">
           <div class="flex gap1 margin-bottom2">
             <h3 class="margin0">Box <%=@dividende.year%></h3>
@@ -68,91 +66,4 @@
             </div>
           <%end%>
         </div>
-      </div>
-      <div class="users margin-top2 flex-column gap3">
-        <div class="flex-column gap2">
-          <%if current_user && current_user == @vinyard.admin%>
-            <div class="flex-column gap1">
-              <h3>Who ownes the stock ?</h3>
-              <div class="flex gap05 flex-wrap">
-                <%if @vinyard.stock_owners.present?%>
-                  <%@stock_owners.each_with_index do |stock_owner, index|%>
-                    <%=link_to user_path(stock_owner), class:"black" do %>
-                      <div class="user">
-                        <p><%=stock_owner.pseudo%><%="," unless index == @stock_owners.size-1%></p>
-                      </div>
-                    <%end%>
-                  <%end %>
-                <%else%>
-                  <p class="italic">Nobody owns this stock yet.</p>
-                <%end%>
-              </div>
-            </div>
-          <%end%>
-          <div class="flex-column gap1">
-            <h3 class="margin-top-none">Who has this box ?</h3>
-            <div class="flex gap05 flex-wrap">
-              <%if @users.length > 0%>
-                <%@users.each_with_index do |user, index|%>
-                  <%=link_to user_path(user), class:"black" do %>
-                    <div class="user">
-                      <p><%=user.pseudo%><%="," unless index == @users.size-1%></p>
-                    </div>
-                  <%end%>
-                <%end %>
-              <%else%>
-                <p class="italic">Nobody wants to echange this box yet.</p>
-              <%end%>
-            </div>
-          </div>
-        </div>
-        <% if current_user && current_user == @vinyard.admin%>
-          <div class="flex-column gap1">
-            <h3>Deliveries statuses</h3>
-            <div class="flex-column gap1">
-              <h4>boxes to send</h4>
-              <%if @boxes_to_send.present?%>
-                <div class="border-bottom">
-                  <%@boxes_to_send.each do |b|%>
-                    <div class="grid-address">
-                      <div class="padding ">
-                        <p><%=b.dividende.vinyard.name%>(<%=b.dividende.year%>)</p>
-                      </div>
-                      <div class="padding">
-                        <p><%=b.user.email%></p>
-                      </div>
-                      <div class="padding ">
-                        <p><%="#{b.address.name}, #{b.address.street}, #{b.address.zip} #{b.address.city}, #{b.address.country}"%></p>
-                      </div>
-                    </div>
-                  <%end%>
-                </div>
-              <%else%>
-                <p>no boxes to send</p>
-              <%end%>
-              <h4>boxes to be picked-up</h4>
-              <%if @boxes_to_pickup.present?%>
-                <div class="border-bottom">
-                  <%@boxes_to_pickup.each do |b|%>
-                    <div class="grid-address">
-                      <div class="padding ">
-                        <p><%=b.dividende.vinyard.name%>(<%=b.dividende.year%>)</p>
-                      </div>
-                      <div class="padding">
-                        <p><%=b.user.email%></p>
-                      </div>
-                      <div class="padding ">
-                        <p><%=b.delivery_method%></p>
-                      </div>
-                    </div>
-                  <%end%>
-                </div>
-              <%else%>
-                <p>no boxes to be picked-up</p>
-              <%end%>
-            </div>
-          </div>
-        <%end%>
-      </div>
-      </div>
     </div>

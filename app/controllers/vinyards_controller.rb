@@ -1,3 +1,4 @@
+require 'csv'
 class VinyardsController < ApplicationController
   def index
     @vinyards = Vinyard.all
@@ -9,6 +10,7 @@ class VinyardsController < ApplicationController
 
     @dividendes = @vinyard.dividendes.current_year
     @dividende = @vinyard.dividendes.current_year.first
+
     @boxes_to_send = @dividende.boxes.where(delivery_method:"shipment")
     @boxes_to_pickup = @dividende.boxes.where(delivery_method:"pickup")
     @stock_owners = @vinyard.stock_owners.joins(:user).map(&:user).uniq
@@ -20,6 +22,27 @@ class VinyardsController < ApplicationController
 
   end
 
+  def shipments_to_csv
+    @vinyard = Vinyard.find(params[:id])
+    @dividende = @vinyard.dividendes.current_year.first
+    @boxes = @dividende.boxes.where(delivery_method: "shipment")
+    csv_data = CSV.generate do |csv|
+      csv << [ "domaine", "method", "recipient", "name","address", "postal code", "city", "country"]
+      @boxes.each do |box|
+        csv << [
+          @vinyard.name,
+          box.delivery_method,
+          box.user.email,
+          box.address.name,
+          box.address.street,
+          box.address.zip,
+          box.address.city,
+          box.address.country
+        ]
+      end
+    end
+    send_data csv_data, filename: "#{@vinyard.name}_#{@dividende.year}_shipments.csv"
+  end
 
   def edit
     @vinyard = Vinyard.find(params[:id])
