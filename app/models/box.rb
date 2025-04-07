@@ -6,6 +6,7 @@ class Box < ApplicationRecord
   has_many :exchanges, through: :box_exchanges
   belongs_to :address, optional: true
   belongs_to :stock_owner
+  has_one :pick_up_date, dependent: :destroy
 
   before_create :define_delivery_method
 

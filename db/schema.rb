@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_26_105647) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_07_080549) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_26_105647) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
     t.index ["color_id"], name: "index_cuvee_colors_on_color_id"
     t.index ["cuvee_id"], name: "index_cuvee_colors_on_cuvee_id"
   end
@@ -141,6 +142,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_26_105647) do
     t.integer "initiator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pick_up_dates", force: :cascade do |t|
+    t.date "date"
+    t.integer "box_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["box_id"], name: "index_pick_up_dates_on_box_id"
+  end
+
+  create_table "slots", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "dividende_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dividende_id"], name: "index_slots_on_dividende_id"
   end
 
   create_table "stock_owners", force: :cascade do |t|
@@ -203,6 +221,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_26_105647) do
   add_foreign_key "dividende_cuvee_colors", "cuvee_colors"
   add_foreign_key "dividende_cuvee_colors", "dividendes"
   add_foreign_key "dividendes", "vinyards"
+  add_foreign_key "pick_up_dates", "boxes"
+  add_foreign_key "slots", "dividendes"
   add_foreign_key "stock_owners", "users"
   add_foreign_key "stock_owners", "vinyards"
   add_foreign_key "vinyard_appellations", "appellations"

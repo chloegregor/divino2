@@ -1,0 +1,18 @@
+<%= turbo_stream.append "slots" do%>
+  <div data-controller="dividende-cuvee-color">
+    <%= fields_for "dividende[slots_attributes][#{Time.current.to_i}]", @slot do |f|%>
+      <div class="flex-column gap1">
+        <div class="flex-column gap1">
+          <%= f.label "from" %>
+          <%= f.date_field :start_date, value: Date.today%>
+        </div>
+        <div class="flex-column gap1">
+          <%= f.label "to" %>
+          <%= f.date_field :end_date%>
+      </div>
+    <%end%>
+    <span>
+      <button type="button" class="delete" data-action="click->dividende-cuvee-color#remove">x</button>
+    </span>
+  </div>
+<%end%>

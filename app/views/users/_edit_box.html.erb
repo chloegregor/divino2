@@ -22,12 +22,19 @@
                 options_for_select(["pickup", "shipment"], @box.delivery_method), {}, data: { action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"}%>
               </div>
             </div>
-            <div class="width">
+            <div class="">
               <div id="address-select" data-preferences-target="address" class="flex gap1">
                 <%=f.label "delivery address:"%>
                 <div>
                   <%=f.select :address_id, options_for_select(@user.addresses.map {|address| [address.title, address.id]}, @box.address_id) %>
                 </div>
+              </div>
+              <div id="pick-up-date-select" data-preferences-target ="date" class="hidden">
+                <%= f.label "pick-up date:"%>
+                <div>
+                  <%= f.select :, options_for_select(@box.dividende.vinyard.shipping_dates.map {|date| [date.strftime("%d %B %Y"), date] }, @box.shipping_date) %>
+                </div>
+
               </div>
             </div>
           </div>

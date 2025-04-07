@@ -28,7 +28,7 @@ class StockOwner < ApplicationRecord
       else
         puts "address not present"
         boxes.each do |box|
-        box.update(delivery_method: self.delivery.delivery_method)
+        box.update(delivery_method: self.user.delivery.delivery_method)
         end
       end
     end

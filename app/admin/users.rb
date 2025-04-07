@@ -36,14 +36,6 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
     end
-    f.inputs "boxes" do
-      f.has_many :boxes, heading: false, allow_destroy: true do |b|
-        b.input :dividende,
-                as: :select,
-                collection: Dividende.all.map { |d| ["#{d.vinyard.name} - #{d.year}", d.id] },
-                prompt: "Sélectionnez un dividende"
-      end
-    end
     f.actions
   end
 

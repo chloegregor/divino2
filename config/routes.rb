@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
     resources :dividendes
     resources :dividende_cuvee_colors
+    resources :slots
     resources :vinyard_appellations do
       resources :cuvees
       resources :cuvee_colors
