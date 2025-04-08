@@ -3,8 +3,10 @@
     <%= form_with model: @box, url: user_box_path(@user, @box), method: :patch do |f| %>
       <div class="flex-column height100 space-between">
         <div>
-          <p><%="#{@box.dividende.vinyard.name} #{@box.dividende.year}"%> <br> pick-up/delivery date: <%="#{@box.dividende.shipping_date.strftime("%d %B %Y")}"%></p>
-
+          <h3 class="margin-bottom1"><%="#{@box.dividende.vinyard.name} #{@box.dividende.year}"%></h3>
+          <div data-preferences-target="shippingDate">
+            <p>delivery date from: <%="#{@box.dividende.shipping_date.strftime("%d %B %Y")}"%></p>
+          </div>
           <div id=vinyard-address data-preferences-target="vinyardAddress" class="hidden">
             <p>pickup address: <%=@box.vinyard.address%></p>
           </div>
@@ -29,10 +31,14 @@
                   <%=f.select :address_id, options_for_select(@user.addresses.map {|address| [address.title, address.id]}, @box.address_id) %>
                 </div>
               </div>
-              <div id="pick-up-date-select" data-preferences-target ="date" class="hidden">
+              <div id="pick-up-date-select" data-preferences-target ="date" class="flex gap1">
                 <%= f.label "pick-up date:"%>
-                <div>
-                  <%= f.select :, options_for_select(@box.dividende.vinyard.shipping_dates.map {|date| [date.strftime("%d %B %Y"), date] }, @box.shipping_date) %>
+                <div id="pick-up-date" data-preferences-target ="pickupdate" class="flex gap1">
+                  <%= fields_for :pick_up_date, @box.pick_up_date do |f| %>
+                  <span>
+                    <%= f.select :date, options_for_select(@slots.map {|slot| [slot.strftime("%d %B %Y")]}, @box.pick_up_date&.date&.strftime("%d %B %Y")), {prompt: "select pick-up date"} %>
+                  </span>
+                  <%end%>
                 </div>
 
               </div>

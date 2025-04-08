@@ -39,7 +39,9 @@ Rails.application.routes.draw do
     resources :box_exchanges, only: [:new, :destroy]
     resources :deliveries, only: [:update]
     resources :addresses, only: [:new, :create, :edit, :update, :destroy]
-    resources :boxes, only: [:edit, :update]
+    resources :boxes, only: [:edit, :update] do
+      resources :pick_up_dates, only: [:new, :create, :edit, :update]
+    end
   end
 
     get 'exchanges/load_boxes', to: 'exchanges#load_boxes'
