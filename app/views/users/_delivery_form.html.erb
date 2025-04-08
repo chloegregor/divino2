@@ -3,7 +3,7 @@
     <div class="addresses flex-column gap2 border-bottom margin-bottom2">
       <div class="list flex-column gap1 ">
         <% if @user.addresses.length > 0%>
-        <p>registered addresses :</p>
+        <h3 class="margin-bottom1">registered addresses :</h3>
           <%@user.addresses.each do |address|%>
             <div class="address flex space-between" id="<%= dom_id(address)%>">
               <div class="border address-title flex">
@@ -33,11 +33,12 @@
       </div>
     </div>
     <div class="delivery ">
+      <h3 class="margin-bottom1">Default settings</h3>
       <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
         <div class= "flex-column gap2 ">
           <div class>
             <div class="flex gap1">
-              <p>preferred delivery method :</p>
+              <p>default delivery method :</p>
             <%=f.select :delivery_method, ["pickup", "shipment"], {}, data: {action: "change->preferences#ToggleAddress", target: "preferences.deliveryMethod"} %>
             </div>
           </div>

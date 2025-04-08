@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["address", "deliveryMethod", "vinyardAddress"]
+  static targets = ["address", "deliveryMethod", "vinyardAddress", "date", "shippingDate"]
   connect() {
     console.log("Stimulus chargé pour les préférences");
     this.ToggleAddress();
@@ -15,10 +15,14 @@ export default class extends Controller {
     if (SelectedValue === "pickup") {
       this.addressTarget.classList.add("hidden");
       this.vinyardAddressTarget.classList.remove("hidden");
+      this.dateTarget.classList.remove("hidden");
+      this.shippingDateTarget.classList.add("hidden");
     }
     else {
       this.addressTarget.classList.remove("hidden");
       this.vinyardAddressTarget.classList.add("hidden");
+      this.dateTarget.classList.add("hidden");
+      this.shippingDateTarget.classList.remove("hidden");
     }
   }
 

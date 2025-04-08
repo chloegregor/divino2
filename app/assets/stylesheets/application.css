@@ -374,3 +374,7 @@ margin-left: 0.2em;
 .space-around{
   justify-content: space-around;
 }
+
+.align-self-center{
+  align-self: center;
+}

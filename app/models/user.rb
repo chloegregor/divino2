@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :vinyards, through: :stock_owners
   has_one :delivery, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  has_one :vinyard, foreign_key: "admin_id", dependent: :nullify
+  has_many :vinyards, foreign_key: "admin_id", dependent: :nullify
   after_create :create_delivery
 
   validates :pseudo, presence: true, uniqueness: true
@@ -45,7 +45,7 @@ class User < ApplicationRecord
   private
 
   def create_delivery
-    Delivery.create(user: self)
+    Delivery.create(user: self, delivery_method:"pickup")
   end
 
 

@@ -7,10 +7,14 @@
             <button class="close" data-action="click->preferences#close">close</button>
           </div>
           <h3><%=@cuvee_color.cuvee.vinyard_appellation.vinyard.name%></h3>
-          <h4 id="appellation"><%=@cuvee_color.cuvee.vinyard_appellation.appellation.name%></h4>
-          <h5 id="color"><%=@cuvee_color.cuvee.name%>, <%=@cuvee_color.color.color%></h5>
-          <span id="description">
-            <p class="margin0"><%=@cuvee_color.description%></p>
+          <h4 id="appellation"><%="#{@cuvee_color.cuvee.vinyard_appellation.appellation.name}, #{@cuvee_color.cuvee.name}, #{@cuvee_color.color.color}"%></h4>
+
+          <span id="description" class="flex-column gap1">
+            <span class="flex gap2">
+              <p class="align-self-center margin0"><%="member price: #{@cuvee_color.price}€"%></p>
+              <p class="hover button border padding margin0">ADD TO BASKET</p>
+            </span>
+            <p class="margin0"><%=simple_format(@cuvee_color.description)%></p>
             <div class="flex flex-end">
               <% if current_user && current_user == @vinyard.admin%>
                 <%=link_to "edit", edit_vinyard_vinyard_appellation_cuvee_color_path(@vinyard, @vinyard_appellation, @cuvee_color), data: {turbo_stream: true}, class:"button"%>

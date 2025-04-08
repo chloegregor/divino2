@@ -7,18 +7,17 @@ class VinyardsController < ApplicationController
   def show
     @vinyard = Vinyard.find(params[:id])
     @vinyard_dividendes = @vinyard.dividendes.order(year: :desc)
-
+    @stock_owners = @vinyard.stock_owners.joins(:user).map(&:user).uniq
+    @vinyard_appellations = @vinyard.vinyard_appellations
     @dividendes = @vinyard.dividendes.current_year
     @dividende = @vinyard.dividendes.current_year.first
-
-    @boxes_to_send = @dividende.boxes.where(delivery_method:"shipment")
-    @boxes_to_pickup = @dividende.boxes.where(delivery_method:"pickup")
-    @stock_owners = @vinyard.stock_owners.joins(:user).map(&:user).uniq
-
-    @bottles = @dividende.dividende_cuvee_colors
-    @appellations = @dividende.vinyard_appellations
-    @users = Box.where(dividende_id: @dividende.id, exchangeable: true).includes(:user).map(&:user).uniq
-    @vinyard_appellations = @vinyard.vinyard_appellations
+    if @dividende.nil?
+      render 'vinyards/show_no_dividende'
+    else
+      @bottles = @dividende.dividende_cuvee_colors
+      @appellations = @dividende.vinyard_appellations
+      @users = Box.where(dividende_id: @dividende.id, exchangeable: true).includes(:user).map(&:user).uniq
+    end
 
   end
 

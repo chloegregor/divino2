@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     if @delivery.address
         @delivery_address = @delivery.address
     end
+
   end
 
 

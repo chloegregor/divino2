@@ -55,12 +55,12 @@ class DividendesController < ApplicationController
     redirect_to vinyard_path(@vinyard)
   end
 
-  
+
 
 
 private
 
   def dividende_params
-    params.require(:dividende).permit(:vinyard_id, :year, :shipping_date, :value, dividende_cuvee_colors_attributes: [:cuvee_color_id, :bottle_quantity, :id, :_destroy])
+    params.require(:dividende).permit(:vinyard_id, :year, :shipping_date, :value, dividende_cuvee_colors_attributes: [:cuvee_color_id, :bottle_quantity, :id, :_destroy], slots_attributes:[:id, :start_date, :end_date, :_destroy])
   end
 end

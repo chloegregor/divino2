@@ -11,6 +11,8 @@
             <div data-cuvee-target="createCuveeColor" class="flex-column gap1">
               <%=f.select :color_id, options_for_select(Color.all.pluck(:color,:id))%>
               <%=f.text_area :description, size:"50x10", class:"width100"%>
+              <%=f.label :price%>
+              <%= f.number_field :price%>
               <span>
                 <%=f.submit "Create"%>
               </span>
