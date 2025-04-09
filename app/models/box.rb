@@ -24,6 +24,7 @@ class Box < ApplicationRecord
       self.address = self.user.delivery.address
     else
       self.delivery_method = "pickup"
+      self.build_pick_up_date = PickUpDate.new(date: self.dividende.slots.first.start_date)
     end
   end
 

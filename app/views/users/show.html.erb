@@ -30,7 +30,7 @@
 
     <div class="border-top display flex">
         <div class="width60 relative">
-            <div class="margin-bottom2 margin-top2">Available for exchange</div>
+            <div class="margin-bottom2 margin-top2"><h3>Available for exchange</h3></div>
               <div class="grid-box border-bottom margin-bottom2 margin-top2 padding-bottom1">
                 <%@exchangeable_boxes.each do |vinyard, boxes|%>
                     <%boxes.each do |box|%>
@@ -74,7 +74,7 @@
                 <% end %>
               </div>
 
-            <div class="margin-top2">other boxes</div>
+            <div class="margin-top2"><h3>other boxes</h3></div>
               <div class="grid-box margin-bottom2 margin-top2 padding-bottom1">
                 <%@non_exchangeable_boxes.each do |vinyard, boxes|%>
                   <%boxes.each do |box|%>
@@ -117,7 +117,24 @@
               </div>
               <div id="modal" class="flex-column">
               </div>
-            </div>
+              <div class="border-top">
+                <h3 class="margin-top1">Schedule <%=Date.current.year%></h3>
+                <div class="grid-address margin-top2">
+                  <%@current_boxes.each do |box|%>
+                    <%if box.delivery_method == "shipping"%>
+                      <%date = box.dividende.shipping_date%>
+                    <%else%>
+                      <%date = box.pick_up_date&.date&.strftime("%d %b %Y")%>
+                    <%end%>
+                    <p><%=box.dividende.vinyard.name%></p>
+                    <p><%=box.delivery_method%></p>
+                    <p><%=date%></p>
+                  <%end%>
+                </div>
+
+              </div>
+
+        </div>
             <% if current_user && @user.id != current_user.id%>
               <%= render "users/form"%>
               <%elsif current_user && @user.id = current_user.id%>
@@ -125,6 +142,7 @@
               <%else%>
               <%= render "users/invite"%>
             <%end%>
+
     </div>
   </div>
 </div>
