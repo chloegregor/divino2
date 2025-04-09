@@ -26,10 +26,10 @@ class VinyardsController < ApplicationController
     @dividende = @vinyard.dividendes.current_year.first
     @boxes = @dividende.boxes.where(delivery_method: "shipment")
     csv_data = CSV.generate do |csv|
-      csv << [ "domaine", "method", "recipient", "name","address", "postal code", "city", "country"]
+      csv << [ "domaine", "method", "recipient", "name", "address", "postal code", "city", "country"]
       @boxes.each do |box|
         csv << [
-          @vinyard.name,
+          box.vinyard.name,
           box.delivery_method,
           box.user.email,
           box.address.name,
@@ -41,6 +41,22 @@ class VinyardsController < ApplicationController
       end
     end
     send_data csv_data, filename: "#{@vinyard.name}_#{@dividende.year}_shipments.csv"
+  end
+
+  def pick_ups_to_csv
+    @vinyard = Vinyard.find(params[:id])
+    @dividende = @vinyard.dividendes.current_year.first
+    @boxes = @dividende.boxes.where(delivery_method: "pickup")
+    csv_data = CSV.generate do |csv|
+      csv << [ "domaine", "method", "recipient", "date of pick up"]
+      @boxes.each do |box|
+          csv << [
+            box.vinyard.name, box.delivery_method, box.user.email,
+            box.pick_up_date&.date&.strftime("%d/%m/%Y")
+          ]
+      end
+    end
+    send_data csv_data, filename: "#{@vinyard.name}_#{@dividende.year}_pick_up.csv"
   end
 
   def edit
