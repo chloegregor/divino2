@@ -2,6 +2,17 @@ require 'csv'
 class VinyardsController < ApplicationController
   def index
     @vinyards = Vinyard.all
+    region = params[:region]
+    appellation = params[:appellation]
+
+    if region.present?
+      @vinyards = @vinyards.where(region: params[:region])
+    end
+    if appellation.present?
+      @vinyards = @vinyards.joins(:appellations).where(appellations: { name: appellation })
+    end
+
+    
   end
 
   def show

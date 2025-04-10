@@ -1,0 +1,8 @@
+<div class=" margin-top1">
+        <%=form_with url:vinyards_path, method: :get, data:{controller: "filter", target:"filter.form" } do |f|%>
+        <div class="flex gap2">
+          <%=f.select :region, options_for_select(Vinyard.all.map{|v| v.region}.uniq, params[:region]), {prompt: "Select a region"}, data: {action: "change->filter#resetAppellation"}%>
+          <%= f.select :appellation, options_for_select(@vinyards.flat_map{|v| v.appellations.map{|a| a.name}}.uniq, params[:appellation]), {prompt: "Select an appellation"}, data: {action: "change->filter#submit", target:"filter.appellation"}%>
+        </div>
+        <%end%>
+      </div>
