@@ -17,6 +17,7 @@ class VinyardsController < ApplicationController
       @bottles = @dividende.dividende_cuvee_colors
       @appellations = @dividende.vinyard_appellations
       @users = Box.where(dividende_id: @dividende.id, exchangeable: true).includes(:user).map(&:user).uniq
+      @slots = @dividende.slots
     end
 
   end

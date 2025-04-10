@@ -1,6 +1,6 @@
 <div class="bggrey">
   <div class="flex-column padding" data-controller="preferences">
-    <div class="addresses flex-column gap2 border-bottom margin-bottom2">
+    <div class=" flex-column gap2 border-bottom margin-bottom1 margin-top1">
       <div class="list flex-column gap1 ">
         <% if @user.addresses.length > 0%>
         <h3 class="margin-bottom1">registered addresses :</h3>
@@ -11,7 +11,7 @@
               </div>
               <div class="buttons flex space-between">
                 <%= link_to "Edit", edit_user_address_path(@user, address), data: { turbo_stream: true }, class: 'button'%>
-                <%= button_to "Delete", user_address_path(@user, address), method: :delete, data: { turbo_confirm: "Are you sure?", turbo_stream: true }, class: 'button' %>
+                <%= button_to "X", user_address_path(@user, address), method: :delete, data: { turbo_confirm: "Are you sure?", turbo_stream: true }, class: 'delete' %>
               </div>
             </div>
           <%end%>
@@ -34,6 +34,7 @@
     </div>
     <div class="delivery ">
       <h3 class="margin-bottom1">Default settings</h3>
+      <p class="italic margin-top1 margin-bottom1"> will be applied to each new box, but can be customize by clicking "edit preferences"</p>
       <%= form_with model: @delivery, url:user_delivery_path(@user, @delivery) do |f| %>
         <div class= "flex-column gap2 ">
           <div class>
@@ -49,13 +50,12 @@
           <div>
 
           <%= f.submit "save"%>
-          <p class="italic margin-top1 margin-bottom1"> you can customize you delivery preferences for each of your boxes</p>
           </div>
         </div>
       <%end%>
     </div>
-    <div class="border-top">
-      <p class="margin-top1">My shares :</p>
+    <div class="border-top flex-column gap1 margin-top1">
+      <h3 class="margin-top1">My shares :</h3>
       <%@user.stock_owners.each do |s|%>
         <%= "#{s.vinyard.name} (#{s.quantity})"%>
         <%end%>

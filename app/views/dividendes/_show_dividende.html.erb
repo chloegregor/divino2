@@ -1,14 +1,15 @@
   <div class="flex-column width50">
-        <div class="flex space-between">
-          <div class="flex gap1 margin-bottom2">
-            <h3 class="margin0">Box <%=@dividende.year%></h3>
-            <div class="flex">
-              <%@dividende.value.times do%>
-                <div class="star"></div>
-              <%end%>
+        <div class="flex-column">
+          <div class="flex gap1">
+            <div class="flex gap1 margin-bottom2">
+              <h3 class="margin0">Box <%=@dividende.year%></h3>
+              <div class="flex">
+                <%@dividende.value.times do%>
+                  <div class="star"></div>
+                <%end%>
+              </div>
             </div>
           </div>
-          <p class="italic margin0"> date of shipping : <%=@dividende.shipping_date.strftime("%d %B %Y")%></p>
         </div>
         <div class="flex-column gap1">
           <div class="border">
@@ -28,6 +29,14 @@
             <%else%>
               <p class="italic">No bottles registered yet</p>
             <%end%>
+          </div>
+          <div class="flex-wrap">
+            <p class="italic margin0"> shipping starts on : <%=@dividende.shipping_date.strftime("%d %B %Y")%></p>
+          </div>
+          <div class="flex-wrap">
+            <p class="italic margin0">pick up available slots :
+              <%=@slots.map {|slot| "from #{slot.start_date.strftime("%d %b %Y")} to #{slot.end_date.strftime("%d %b %Y")}"}.join(", ")%>
+            </p>
           </div>
           <% if current_user && current_user == @vinyard.admin%>
             <span class="flex space-between">
