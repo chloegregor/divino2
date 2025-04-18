@@ -378,3 +378,7 @@ margin-left: 0.2em;
 .align-self-center{
   align-self: center;
 }
+
+.cursor{
+  cursor: pointer;
+}

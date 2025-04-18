@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="filter"
 export default class extends Controller {
-  static targets = ["form", "appellation"]
+static targets = ["form", "appellation", "region", "listAppellation"]
   connect() {
   }
 
@@ -13,6 +13,16 @@ export default class extends Controller {
   resetAppellation() {
     this.appellationTarget.value = "";
     this.formTarget.requestSubmit();
+  }
+
+  toggleRegion(){
+    this.regionTarget.classList.toggle("hidden");
+  }
+
+  toggleAppellation(){
+    console.log("toggleAppellation");
+    console.log(this.listAppellationTarget); // 👈
+    this.listAppellationTarget.classList.toggle("hidden");
   }
 
 }
