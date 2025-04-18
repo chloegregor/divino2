@@ -1,0 +1,38 @@
+<%=render "shared/header"%>
+<div class="container">
+  <div class="menu">
+    <div class="flex space-between padding-bottom1">
+      <span class="flex gap2">
+        <%=link_to vinyards_path do%>
+          <h3 class="margin0 hover cursor">vineyards</h3>
+        <%end%>
+        <%=link_to cuvee_colors_path do %>
+          <h3 class="margin0 hover cursor">bottles</h3>
+        <%end%>
+      </span>
+      <%if current_user%>
+        <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
+          <h3 class="hover">my cellar</h3>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+  <div class="border-top display">
+    <div class="bottles">
+      <div class="filters">
+
+      </div>
+      <div class=" grid">
+        <%@cuvee_colors.each do |cc|%>
+        <div class="bottle">
+          <%= link_to vinyard_vinyard_appellation_cuvee_color_path(cc.vineyard, cc.vineyard_appellation, cc), data: {turbo_stream: true} do %>
+            <%=cc.vineyard.name%>
+          <%end%>
+        </div>
+        <%end%>
+        <div id="show-cuvee-color"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@
           </div>
         <%end%>
       </div>
-      <div class="button cursor" data-action="click->filter#toggleAppellation">select appellation</div>
+      <div class="button cursor" data-action="click->filter#toggleAppellation">appellation</div>
       <div class=<%='hidden' unless @appellation%> data-filter-target="listAppellation">
         <%appellations = @selected_vinyards.flat_map { |v| v.appellations.map(&:name) }.uniq.sort %>
         <%appellations.each do |v|%>
