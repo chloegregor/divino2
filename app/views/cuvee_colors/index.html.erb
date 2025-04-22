@@ -24,16 +24,15 @@
       </div>
       <div class="grid-bottle">
         <%@cuvee_colors.each do |cc|%>
-        <div class="bottle border padding ">
+        <div class="bottle border padding flex-column space-between">
           <%= link_to vinyard_vinyard_appellation_cuvee_color_path(cc.vineyard, cc.vineyard_appellation, cc), data: {turbo_stream: true} do %>
             <div class="flex">
               <%=image_tag "wine.jpg", class:"wine"%>
-              <div class="flex-column gap05 padding">
-                <p><%=cc.vineyard.name%></p>
-                <p><%= cc.vineyard.region%></p>
-                <p><%=cc.vineyard_appellation.appellation.name%></p>
-                <p><%= cc.cuvee.name%></p>
-                <p><%= cc.color.color%></p>
+              <div class="flex-column gap05 padding margin-left10 height11">
+                  <p class="margin0"><%=cc.vineyard.name%>, <%= cc.vineyard.region%></p>
+                <p class="margin0"><%=cc.vineyard_appellation.appellation.name%></p>
+                <p class="margin0"><%= cc.cuvee.name%></p>
+                <p class="margin0"><%= cc.color.color%></p>
               </div>
             </div>
           <%end%>
