@@ -1,0 +1,50 @@
+<%=render "shared/header"%>
+<div class="container">
+  <div class="menu">
+    <div class="flex space-between padding-bottom1">
+      <span class="flex gap2">
+        <%=link_to vinyards_path do%>
+          <h3 class="margin0 hover cursor">vineyards</h3>
+        <%end%>
+        <%=link_to cuvee_colors_path do %>
+          <h3 class="margin0 hover cursor">bottles</h3>
+        <%end%>
+      </span>
+      <%if current_user%>
+        <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
+          <h3 class="hover">my cellar</h3>
+        <%end%>
+      <%end%>
+    </div>
+  </div>
+  <div class="border-top display">
+    <div class="bottles">
+      <div class="filters">
+
+      </div>
+      <div class="grid-bottle">
+        <%@cuvee_colors.each do |cc|%>
+        <div class="bottle border padding flex-column space-between">
+          <%= link_to vinyard_vinyard_appellation_cuvee_color_path(cc.vineyard, cc.vineyard_appellation, cc), data: {turbo_stream: true} do %>
+            <div class="flex">
+              <%=image_tag "wine.jpg", class:"wine"%>
+              <div class="flex-column gap05 padding margin-left10 height11">
+                  <p class="margin0"><%=cc.vineyard.name%>, <%= cc.vineyard.region%></p>
+                <p class="margin0"><%=cc.vineyard_appellation.appellation.name%></p>
+                <p class="margin0"><%= cc.cuvee.name%></p>
+                <p class="margin0"><%= cc.color.color%></p>
+              </div>
+            </div>
+          <%end%>
+          <div class="flex flex-end">
+            <p class="align-self-center margin0"><%="#{cc.price}€"%></p>
+            <p class="hover button border padding margin0">ADD TO BASKET</p>
+          </div>
+        </div>
+        <%end%>
+        <div id="show-cuvee-color"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

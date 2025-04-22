@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :appellations
 
+  resources :cuvee_colors
+
   resources :vinyards do
     member do
       get "shipments_csv", to: "vinyards#shipments_to_csv"

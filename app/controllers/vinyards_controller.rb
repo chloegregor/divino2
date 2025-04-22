@@ -2,6 +2,27 @@ require 'csv'
 class VinyardsController < ApplicationController
   def index
     @vinyards = Vinyard.all
+    @regions = Vinyard.select(:region).distinct.map(&:region)
+    @region = params[:region]
+    @appellation = params[:appellation]
+
+    if @region.present?
+      @vinyards = @vinyards.where(region: @region)
+      @selected_vinyards = Vinyard.where(region: @region)
+
+    else
+      @selected_vinyards = Vinyard.all
+
+    end
+
+
+    if @appellation.present?
+      @vinyards = @vinyards.joins(:appellations).where(appellations: { name: @appellation })
+
+    end
+
+    @vinyards = @vinyards.order(:region)
+
   end
 
   def show

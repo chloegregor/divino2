@@ -1,15 +1,13 @@
 <%= render "shared/header"%>
 <div class="container">
   <div class="flex space-between margin-top2 padding-bottom1">
-    <div class="flex space-between gap1">
-      <h3 class="align-flex-end"><%=@vinyard.name%></h2>
+    <div class="flex gap1">
+      <h3 class="align-flex-end"><%=@vinyard.name%></h3>
+      <h4 class="align-flex-end margin0"><%=@vinyard.region%></h4>
       <%appellations = @vinyard.vinyard_appellations%>
       <h4 class="flex align-flex-end">
         <%appellations.each_with_index do |appellation,index|%>
           <%= appellation.appellation.name %><%= "&nbsp;&middot;".html_safe unless index == appellations.size - 1%>
-          <%if current_user && current_user == @vinyard.admin%>
-            <%=button_to "x", vinyard_vinyard_appellation_path(@vinyard, appellation), method: :delete, class:"delete"%>
-          <%end%>
         <%end%>
       </h4>
       <%if current_user == @vinyard.admin%>
@@ -57,6 +55,9 @@
                 <span id="new-cuvee"></span>
 
               <%end%>
+               <%if current_user && current_user == @vinyard.admin%>
+                  <%=button_to "x", vinyard_vinyard_appellation_path(@vinyard, va), method: :delete, class:"delete"%>
+              <%end%>
               <h4><%=va.appellation.name%> :</h4>
                 <div class="flex gap1">
 
@@ -64,7 +65,7 @@
                       <div class="flex gap1">
                         <p>
                           <%=cuvee.name%>
-                          (
+
                           <%cuvee.cuvee_colors.each_with_index do |cc, index|%>
                             <%=link_to vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc), data:{turbo_stream: true} do%>
                               <%unless index == (cuvee.cuvee_colors.size) -1 %>
@@ -77,7 +78,7 @@
                               <%= button_to "x", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc ), method: :delete, class:"delete"%>
                             <%end%>
                           <%end%>
-                            )
+
                         </p>
                       </div>
                     <%end%>
@@ -86,6 +87,16 @@
                 </div>
             </div>
           <%end%>
+          <%if current_user == @vinyard.admin%>
+        <div class="align-flex-end" id="new-vinyard-appellation">
+        </div>
+
+          <%if current_user && current_user == @vinyard.admin%>
+          <span class="flex flex-end">
+            <%= link_to "add appellation", new_vinyard_vinyard_appellation_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
+          </span>
+          <%end%>
+      <%end%>
         </div>
       </div>
     </div>

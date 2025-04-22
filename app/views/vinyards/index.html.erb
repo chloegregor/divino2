@@ -3,42 +3,53 @@
 <div class="container">
   <div class="menu">
     <div class="flex space-between padding-bottom1">
-      <h3 class="margin0">Vineyards</h3>
+      <span class="flex gap2">
+        <h3 class="margin0 hover cursor">vineyards</h3>
+        <%=link_to cuvee_colors_path do %>
+          <h3 class="margin0 hover cursor">bottles</h3>
+        <%end%>
+      </span>
       <%if current_user%>
         <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
-          <h2 class="hover">my cellar</h2>
+          <h3 class="hover">my cellar</h3>
         <%end%>
       <%end%>
     </div>
-    </div>
-    <div class="border-top display ">
-      <div class="vinyards grid">
-        <% @vinyards.each do |vinyard|%>
-        <div class="vinyard">
-          <%= link_to vinyard_path(vinyard), class: "text-decoration black" do %>
-            <div class="height100 flex-column gap05">
-              <div class="vinyard-name align-center border-bottom">
-                <h3 class="name"><%= vinyard.name %></h3>
-              </div>
-              <div class="vinyard-info flex space-between">
-                <% va = vinyard.appellations%>
-                  <div class="name appellation text-align-center">
-                    <h4 class="margin-top-none margin-bottom-none">
-                      <% va.each_with_index do |appellation, index| %>
-                          <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == va.size - 1%>
-                      <%end%>
-                    </p>
-                  </div>
-                  <div class="name text-align-end">
-                    <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.dividendes.current_year.includes(:boxes).flat_map{ |d| d.boxes.where(exchangeable: true) }.uniq.length %></p>
-                  </div>
+  </div>
+    <div class="border-top display">
+      <div class="vinyards">
+        <%=render "vinyards/filter"%>
+        <div class="vinyards grid">
+          <% @vinyards.each do |vinyard|%>
+          <div class="vinyard">
+            <%= link_to vinyard_path(vinyard), class: "text-decoration black" do %>
+              <div class="height100 flex-column gap05">
+                <div class="vinyard-name align-center border-bottom">
+                  <h2 class=""><%= vinyard.name %></h2>
+                </div>
+                <div class="vinyard-info flex space-between">
+                  <span class="text-align-center">
+                    <h4 class="margin0"><%=vinyard.region%></h4>
+                  </span>
+                  <% va = vinyard.appellations%>
+                    <div class=" appellation text-align-center">
+                      <h4 class="margin-top-none margin-bottom-none">
+                        <% va.each_with_index do |appellation, index| %>
+                            <%= appellation.name %><%= "&nbsp;&middot;".html_safe unless index == va.size - 1%>
+                        <%end%>
+                      </p>
+                    </div>
+                    <div class="name text-align-end">
+                      <p class="margin-bottom-none margin-top-none"> available boxes : <%=vinyard.dividendes.current_year.includes(:boxes).flat_map{ |d| d.boxes.where(exchangeable: true) }.uniq.length %></p>
+                    </div>
 
 
+                </div>
               </div>
+              <%end%>
             </div>
-            <%end%>
-          </div>
-        <%end%>
+          <%end%>
+        </div>
       </div>
     </div>
   </div>

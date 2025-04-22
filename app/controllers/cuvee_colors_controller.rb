@@ -1,5 +1,8 @@
 class CuveeColorsController < ApplicationController
 
+  def index
+    @cuvee_colors = CuveeColor.all
+  end
   def show
     @cuvee_color = CuveeColor.find(params[:id])
     @vinyard = Vinyard.find(params[:vinyard_id])

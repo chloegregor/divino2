@@ -378,3 +378,19 @@ margin-left: 0.2em;
 .align-self-center{
   align-self: center;
 }
+
+.cursor{
+  cursor: pointer;
+}
+
+.margin-left10{
+  margin-left: 10em;
+}
+
+.bottle{
+  height: 20em
+}
+
+.height11em{
+  height: 11em;
+}

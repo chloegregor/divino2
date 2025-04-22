@@ -29,7 +29,7 @@ class Vinyard < ApplicationRecord
 
   def define_admin
     admin = User.find_by_id(self.admin_id)
-    admin.admin!
+    admin&.admin!
   end
 
 end

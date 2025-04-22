@@ -6,7 +6,9 @@
           <div class="flex flex-end">
             <button class="close" data-action="click->preferences#close">close</button>
           </div>
-          <h3><%=@cuvee_color.cuvee.vinyard_appellation.vinyard.name%></h3>
+          <%=link_to vinyard_path(@cuvee_color.vineyard), data:{action: "click->preferences#close"} do%>
+            <h3><%=@cuvee_color.cuvee.vinyard_appellation.vinyard.name%></h3>
+          <%end%>
           <h4 id="appellation"><%="#{@cuvee_color.cuvee.vinyard_appellation.appellation.name}, #{@cuvee_color.cuvee.name}, #{@cuvee_color.color.color}"%></h4>
 
           <span id="description" class="flex-column gap1">

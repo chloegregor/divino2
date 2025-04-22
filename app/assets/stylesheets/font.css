@@ -1,12 +1,13 @@
 h2{
   font-family: "Inter", sans-serif;
-  font-size: 1em;
+  font-size: 1.2em;
   margin:0;
+  font-weight: 100;
 }
 
 h4{
   font-family: "Inter", sans-serif;
-  font-size: 1.2em;
+  font-size: 1em;
   margin: 0;
   font-weight: 100;
 }

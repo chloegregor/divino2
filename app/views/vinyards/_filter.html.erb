@@ -1,0 +1,29 @@
+<div class=" margin-top1">
+  <%=form_with url:vinyards_path, method: :get, data:{controller: "filter", target:"filter.form" } do%>
+    <div class="flex gap2">
+      <div class=" cursor" data-action="click->filter#toggleRegion">region</div>
+      <div class=<%="hidden" unless @region%> data-filter-target="region">
+        <%@regions.each do |region|%>
+          <div class="flex-column gap1">
+            <div class="flex gap1">
+              <%= check_box_tag "region[]", region, params[:region].try(:include?, region), {data: {action: "change->filter#submit", target:"filter.region"}}%>
+              <%= label_tag "#{region}"%>
+            </div>
+          </div>
+        <%end%>
+      </div>
+      <div class="button cursor" data-action="click->filter#toggleAppellation">appellation</div>
+      <div class=<%='hidden' unless @appellation%> data-filter-target="listAppellation">
+        <%appellations = @selected_vinyards.flat_map { |v| v.appellations.map(&:name) }.uniq.sort %>
+        <%appellations.each do |v|%>
+            <div class="flex-column gap1">
+              <div class="flex gap1">
+                <%= check_box_tag "appellation[]", v, params[:appellation].try(:include?, v), {data: {action: "change->filter#submit", target:"filter.appellation"}}%>
+                <%= label_tag "#{v}"%>
+              </div>
+            </div>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+</div>
