@@ -65,7 +65,7 @@
                       <div class="flex gap1">
                         <p>
                           <%=cuvee.name%>
-                          (
+
                           <%cuvee.cuvee_colors.each_with_index do |cc, index|%>
                             <%=link_to vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc), data:{turbo_stream: true} do%>
                               <%unless index == (cuvee.cuvee_colors.size) -1 %>
@@ -78,7 +78,7 @@
                               <%= button_to "x", vinyard_vinyard_appellation_cuvee_color_path(@vinyard, va, cc ), method: :delete, class:"delete"%>
                             <%end%>
                           <%end%>
-                            )
+
                         </p>
                       </div>
                     <%end%>

@@ -22,12 +22,25 @@
       <div class="filters">
 
       </div>
-      <div class=" grid">
+      <div class="grid-bottle">
         <%@cuvee_colors.each do |cc|%>
-        <div class="bottle">
+        <div class="bottle border padding ">
           <%= link_to vinyard_vinyard_appellation_cuvee_color_path(cc.vineyard, cc.vineyard_appellation, cc), data: {turbo_stream: true} do %>
-            <%=cc.vineyard.name%>
+            <div class="flex">
+              <%=image_tag "wine.jpg", class:"wine"%>
+              <div class="flex-column gap05 padding">
+                <p><%=cc.vineyard.name%></p>
+                <p><%= cc.vineyard.region%></p>
+                <p><%=cc.vineyard_appellation.appellation.name%></p>
+                <p><%= cc.cuvee.name%></p>
+                <p><%= cc.color.color%></p>
+              </div>
+            </div>
           <%end%>
+          <div class="flex flex-end">
+            <p class="align-self-center margin0"><%="#{cc.price}€"%></p>
+            <p class="hover button border padding margin0">ADD TO BASKET</p>
+          </div>
         </div>
         <%end%>
         <div id="show-cuvee-color"></div>
