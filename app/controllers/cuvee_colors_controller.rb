@@ -59,6 +59,6 @@ class CuveeColorsController < ApplicationController
   private
 
   def cuvee_color_params
-    params.require(:cuvee_color).permit(:description, :color_id, :cuvee_id)
+    params.require(:cuvee_color).permit(:description, :color_id, :cuvee_id, :price)
   end
 end

@@ -9,10 +9,9 @@
           </div>
           <div class="field">
             <%= f.label :shipping_date%>
-            <%= f.date_field :shipping_date %>
+            <%= f.date_field :shipping_date%>
           </div>
           <div class="field">
-            <%= f.label "pick-up time slots"%>
             <div id="slots"></div>
             <%= button_tag "define time slots for pick-ups", formaction: new_vinyard_slot_path(@vinyard), formmethod: :get, data:{turbo_stream: true} %>
           </div>
@@ -29,8 +28,8 @@
                   <%=dcc.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
                 </div>
                 <div class="field">
-                  <%=dcc.label :bottle_quantity%>
-                  <%= dcc.number_field :bottle_quantity%>
+
+                  <%= dcc.number_field :bottle_quantity, placeholder:"how many bottle ?"%>
                 </div>
               <%end%>
             </div>

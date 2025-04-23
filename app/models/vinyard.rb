@@ -21,7 +21,7 @@ class Vinyard < ApplicationRecord
 
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "description", "id","address", "id_value", "name", "admin_id", "updated_at"]
+    ["created_at", "description", "id","address", "id_value", "name", "region", "admin_id", "updated_at"]
   end
   def self.ransackable_associations(auth_object = nil)
     ["appellations", "cuvees", "vinyard_appellations", "cuvee_colors", "colors", "dividendes", "boxes", "stock_owners", "users"]

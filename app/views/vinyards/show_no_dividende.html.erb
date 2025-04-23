@@ -12,14 +12,7 @@
           <%end%>
         <%end%>
       </h4>
-      <%if current_user == @vinyard.admin%>
-        <div class="align-flex-end" id="new-vinyard-appellation">
-        </div>
 
-          <%if current_user && current_user == @vinyard.admin%>
-            <%= link_to "add appellation", new_vinyard_vinyard_appellation_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
-          <%end%>
-      <%end%>
     </div>
       <%if current_user%>
           <%=link_to user_path(current_user), class:"height-fit-content align-flex-end" do %>
@@ -87,6 +80,11 @@
             </div>
           <%end%>
         </div>
+        <div class="align-flex-end" id="new-vinyard-appellation">
+        </div>
+          <%if current_user && current_user == @vinyard.admin%>
+            <%= link_to "add appellation", new_vinyard_vinyard_appellation_path(@vinyard), data: { turbo_stream: true }, class:"button"%>
+          <%end%>
       </div>
     </div>
   </div>
