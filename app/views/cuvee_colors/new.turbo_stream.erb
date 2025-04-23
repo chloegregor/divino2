@@ -4,15 +4,14 @@
       <div class="flex-column space-between">
         <%=form_with model:@cuvee_color, url: vinyard_vinyard_appellation_cuvee_colors_path(@vinyard, @vinyard_appellation), method: :post do |f|%>
           <div class="flex-column gap1">
-            <%=f.select :cuvee_id, options_for_select(@cuvees.pluck(:name, :id) + [["➕ Ajouter une cuvée", "new"]]), {}, { data: { target: "cuvee.selector", action: "change->cuvee#check" } } %>
+            <%=f.select :cuvee_id, options_for_select(@cuvees.pluck(:name, :id) + [["➕ Create cuvee name", "new"]]), {}, { data: { target: "cuvee.selector", action: "change->cuvee#check" } } %>
             <div class="hidden" data-cuvee-target="createCuvee">
               <%= render 'cuvees/form', cuvee: Cuvee.new, vinyard_appellation: @vinyard_appellation, vinyard: @vinyard %>
             </div>
             <div data-cuvee-target="createCuveeColor" class="flex-column gap1">
               <%=f.select :color_id, options_for_select(Color.all.pluck(:color,:id))%>
-              <%=f.text_area :description, size:"50x10", class:"width100"%>
-              <%=f.label :price%>
-              <%= f.number_field :price%>
+              <%=f.text_area :description, size:"50x10", class:"width100", placeholder: "description of the bottle"%>
+              <%= f.number_field :price, placeholder:"price", step: 0.01%>
               <span>
                 <%=f.submit "Create"%>
               </span>

@@ -30,7 +30,7 @@
                 </div>
               <%end%>
               <div id="slots"></div>
-              <%= button_tag "define time slots for pick-ups", formaction: new_vinyard_slot_path(@vinyard), formmethod: :get, data: { turbo_stream: true } %>
+              <%= button_tag "define new time slots for pick-ups", formaction: new_vinyard_slot_path(@vinyard), formmethod: :get, data: { turbo_stream: true } %>
             </div>
             <div class="field">
               <%= f.label :value %>

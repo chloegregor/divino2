@@ -1,10 +1,11 @@
 <%=form_with model:cuvee, url: vinyard_vinyard_appellation_cuvees_path(@vinyard, @vinyard_appellation), method: :post do |f| %>
   <div class="flex-column gap1 width100">
     <%=f.hidden_field :vinyard_appellation_id, value: @vinyard_appellation.id%>
-    <%=f.text_field :name%>
+    <%=f.text_field :name, placeholder: "name of cuvee", class:"width100"%>
     <%= fields_for :cuvee_color do |cuvee_color|%>
       <%=cuvee_color.select :color_id, Color.all.map { |color| [color.color, color.id] }, {prompt: "choose a color"}%>
-      <%=cuvee_color.text_area :description, size:"50x10", class:"width100"%>
+      <%=cuvee_color.text_area :description, size:"50x10", class:"width100", placeholder: "description of the bottle"%>
+      <%= cuvee_color.number_field :price, step: 0.01, placeholder:"price"%>
     <%end%>
     <div>
       <%=f.submit%>

@@ -41,6 +41,10 @@ ActiveAdmin.register Box do
       row :delivery_address do |box|
         box.address ? "#{box.address.name} - #{box.address.street}, #{box.address.zip} #{box.address.city}, #{box.address.country}" : "No address"
       end
+
+      row :pick_up_date do |box|
+        box.pick_up_date ? box.pick_up_date.date.strftime("%d/%m/%Y") : "No pick up date"
+      end
       table do
         thead do
           tr do

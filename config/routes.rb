@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     member do
       get "shipments_csv", to: "vinyards#shipments_to_csv"
       get "pick_ups_csv", to: "vinyards#pick_ups_to_csv"
+      get "edit_description", to: "vinyards#edit_description"
+      get "edit_region", to: "vinyards#edit_region"
+      get "edit_address", to: "vinyards#edit_address"
     end
     resources :dividendes
     resources :dividende_cuvee_colors

@@ -6,7 +6,7 @@
           <div class="field flex-column gap1" >
             <%=f.label :appellation_id, "Choose Appellation:"%>
             <%=f.select :appellation_id,
-              options_for_select(Appellation.all.pluck(:name, :id) + [["➕ Ajouter une appellation", "new"]]),
+              options_for_select(Appellation.all.pluck(:name, :id) + [["➕ Create Appellation", "new"]]),
               {},
               { data: { action: "change->appellation#check", target:"appellation.select" } } %>
               <div class="hidden" data-appellation-target="create">

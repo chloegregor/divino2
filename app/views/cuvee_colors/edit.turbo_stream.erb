@@ -2,16 +2,10 @@
   <%=form_with model: @cuvee_color, url:vinyard_vinyard_appellation_cuvee_color_path(@vinyard, @vinyard_appellation, @cuvee_color), method: :patch do |f|%>
     <div class="width100 flex-column">
       <span class=" flex-column align-center">
-        <span>
-          <%=f.label :price%>
-        </span>
-        <%= f.number_field :price%>
+        <%= f.number_field :price, placeholder:"price", step: 0.01%>
       </span>
       <span class=" flex-column align-center">
-        <span>
-          <%=f.label :description%>
-        </span>
-        <%=f.text_area :description, size:"150x30"%>
+        <%=f.text_area :description, size:"150x30", placeholder:"description"%>
       </span>
       <span class="margin-bottom1 margin-top1 flex flex-end">
         <%=f.submit "update bottle"%>

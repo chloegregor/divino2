@@ -81,9 +81,19 @@ class VinyardsController < ApplicationController
     send_data csv_data, filename: "#{@vinyard.name}_#{@dividende.year}_pick_up.csv"
   end
 
-  def edit
+  def edit_description
     @vinyard = Vinyard.find(params[:id])
     render 'vinyards/edit_description'
+  end
+
+  def edit_region
+    @vinyard = Vinyard.find(params[:id])
+    render 'vinyards/edit_region'
+  end
+
+  def edit_address
+    @vinyard = Vinyard.find(params[:id])
+    render 'vinyards/edit_address'
   end
 
   def update
@@ -95,7 +105,7 @@ class VinyardsController < ApplicationController
   private
 
   def vinyard_params
-    params.require(:vinyard).permit(:description)
+    params.require(:vinyard).permit(:description, :region, :address)
   end
 
 end

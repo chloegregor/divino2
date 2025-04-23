@@ -1,0 +1,8 @@
+<%=turbo_stream.replace "add-address" do%>
+  <%=form_with model: @vinyard do |form| %>
+    <div class="flex gap1" >
+        <%=form.text_field :address, placeholder:"address for pick-ups" %>
+      <%=form.submit "update"%>
+    </div>
+  <% end %>
+<%end%>

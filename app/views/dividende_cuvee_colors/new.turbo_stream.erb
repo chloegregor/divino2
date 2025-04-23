@@ -6,8 +6,7 @@
           <%=f.select :cuvee_color_id, @cuvee_colors.map {|cc| ["#{cc.cuvee.name}, #{cc.cuvee.vinyard_appellation.appellation.name}(#{cc.color.color})", cc.id]}%>
         </div>
         <div class="field">
-          <%=f.label :bottle_quantity%>
-          <%= f.number_field :bottle_quantity%>
+          <%= f.number_field :bottle_quantity, placeholder:"how many bottles ?"%>
         </div>
       <%end%>
     <button type=button class="delete" data-action="click->dividende-cuvee-color#remove">x</button>

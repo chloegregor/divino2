@@ -1,0 +1,11 @@
+<%=turbo_stream.replace "add-region" do%>
+  <%=form_with model: @vinyard do |form| %>
+    <div class="flex gap1" data-controller="region">
+      <%=form.select :region_id, options_for_select(Vinyard.all.pluck(:region) + [["➕ Create region", "new"]]), {}, { data: { action: "change->region#check", target:"region.select" } } %>
+      <div class="hidden" data-region-target="create">
+        <%=form.text_field :region %>
+      </div>
+      <%=form.submit "update"%>
+    </div>
+  <% end %>
+<%end%>
