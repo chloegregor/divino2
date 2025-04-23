@@ -2,12 +2,14 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="appellation"
 export default class extends Controller {
-  static targets = ["create", "button"]
+  static targets = ["create", "button", "select"]
+
   connect() {
+    this.check()
   }
 
-  check(event) {
-    if (event.target.value === 'new') {
+  check() {
+    if (this.selectTarget.value === 'new') {
       this.showForm()
     } else {
       this.hideForm()

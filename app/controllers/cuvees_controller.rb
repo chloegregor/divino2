@@ -10,11 +10,11 @@ class CuveesController < ApplicationController
         redirect_to vinyard_path(@vinyard)
       else
         @cuvee.destroy
-        render 'cuvee_colors/new'
+
       end
 
     else
-      render 'cuvee_colors/new'
+      render 'cuvees_colors/new', formats: :turbo_stream
     end
   end
 

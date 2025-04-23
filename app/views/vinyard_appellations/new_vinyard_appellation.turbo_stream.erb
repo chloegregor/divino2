@@ -8,7 +8,7 @@
             <%=f.select :appellation_id,
               options_for_select(Appellation.all.pluck(:name, :id) + [["➕ Ajouter une appellation", "new"]]),
               {},
-              { data: { action: "change->appellation#check" } } %>
+              { data: { action: "change->appellation#check", target:"appellation.select" } } %>
               <div class="hidden" data-appellation-target="create">
                 <%= render 'appellations/form', appellation: Appellation.new, vinyard: @vinyard %>
               </div>
